@@ -1,0 +1,6 @@
+/******** Body styles ********/
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    touch-action: manipulation;
+}

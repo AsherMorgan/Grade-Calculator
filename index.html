@@ -9,13 +9,18 @@
     </head>
     <body onload="addAssignment();">
         <h1>Grade-Calculator</h1>
+        
+        <div id="grade">
+            <label id="gradePercentage"></label>
+            <label id="gradeLetter"></label>
+        </div>
 
         <template id="assignmentTemplate">
             <div>
                 <div class="assignment">
-                    <input class="pointsEarned" type="number" value="10">
+                    <input class="pointsEarned" type="number" oninput="update();" value="10">
                     /
-                    <input class="pointsPossible" type="number" value="10">
+                    <input class="pointsPossible" type="number" oninput="update();" value="10">
                     <button id="assignmentRemove" class="assignmentRemove">╳</button>
                 </div>
             </div>

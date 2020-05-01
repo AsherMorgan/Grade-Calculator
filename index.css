@@ -5,6 +5,52 @@ body {
     touch-action: manipulation;
 }
 
+h2 {
+    font-weight: normal;
+}
+
+
+
+/******** Grade styles ********/
+#grade {
+    width: 120px;
+    padding: 10px;
+    border: 1px solid #000000;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#gradePercentage {
+    overflow: hidden;
+}
+
+#gradeLetter {
+    margin-left: 10px;
+}
+
+.letterA {
+    background-color: #87BD6C;
+}
+
+.letterB {
+    background-color: #CFE7FF;
+}
+
+.letterC {
+    background-color: #FFFF8D;
+}
+
+.letterD {
+    background-color: #F9AC48;
+}
+
+.letterF {
+    background-color: #EF3D3D;
+}
+
 
 
 /******** Assignments styles ********/

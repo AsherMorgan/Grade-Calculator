@@ -12,28 +12,34 @@
     <body onload="addAssignment();">
         <h1>Grade-Calculator</h1>
         
-        <div id="grade">
-            <label id="gradePercentage"></label>
-            <label id="gradeLetter"></label>
-        </div>
-
-        <template id="assignmentTemplate">
-            <div>
-                <div class="assignment">
-                    <input class="pointsEarned" type="number" oninput="update();" value="10">
-                    /
-                    <input class="pointsPossible" type="number" oninput="update();" value="10">
-                    <button id="assignmentRemove" class="assignmentRemove">╳</button>
-                </div>
+        <div>
+            <h3>Final Grade:</h3>
+            
+            <div id="grade">
+                <label id="gradePercentage"></label>
+                <label id="gradeLetter"></label>
             </div>
-        </template>
-
-        <div id="assignments">
-
         </div>
 
         <div>
-            <button id="addIcon" onclick="addAssignment();">+</button>
+            <h3>Assignments:</h3>
+            
+            <template id="assignmentTemplate">
+                <div>
+                    <div class="assignment">
+                        <input class="pointsEarned" type="number" oninput="update();" value="10">
+                        &#47
+                        <input class="pointsPossible" type="number" oninput="update();" value="10">
+                        <button id="assignmentRemove" class="assignmentRemove">╳</button>
+                    </div>
+                </div>
+            </template>
+            
+            <div id="assignments"></div>
+            
+            <div>
+                <button id="addAssignment" onclick="addAssignment();">+</button>
+            </div>
         </div>
     </body>
 </html>

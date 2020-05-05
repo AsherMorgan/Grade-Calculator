@@ -77,11 +77,14 @@ h3 {
 }
 
 #addAssignment {
+    display: inline-block;
     margin-top: 10px;
     padding: 0px;
     height: 40px;
     width: 40px;
-    font-size: 30px;
+    line-height: 40px;
+    font-size: 40px;
+    background-color: #E0E0E0;
     border: none;
     border-radius: 50%;
     cursor: pointer

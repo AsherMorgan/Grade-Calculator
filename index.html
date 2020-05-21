@@ -27,9 +27,13 @@
             <template id="assignmentTemplate">
                 <div>
                     <div class="assignment">
+                        <b>Score: </b>
                         <input class="pointsEarned" type="number" oninput="update();" value="10">
                         &#47
                         <input class="pointsPossible" type="number" oninput="update();" value="10">
+                        &nbsp
+                        <b>Weight: </b>
+                        <input class="weight" type="number" oninput="update();" value="1">
                         <button id="assignmentRemove" class="assignmentRemove">╳</button>
                     </div>
                 </div>

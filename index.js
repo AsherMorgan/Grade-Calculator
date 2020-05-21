@@ -30,12 +30,11 @@ function addAssignment() {
 function update() {
     // Get assignment point totals
     var pointsEarned = 0;
-    for (assignment of document.getElementsByClassName("pointsEarned")) {
-        pointsEarned += parseFloat(assignment.value);
-    }
     var pointsPossible = 0;
-    for (assignment of document.getElementsByClassName("pointsPossible")) {
-        pointsPossible += parseFloat(assignment.value);
+    for (assignment of document.getElementsByClassName("assignment")) {
+        weight = parseFloat(assignment.getElementsByClassName("weight")[0].value)
+        pointsEarned += weight * parseFloat(assignment.getElementsByClassName("pointsEarned")[0].value)
+        pointsPossible += weight * parseFloat(assignment.getElementsByClassName("pointsPossible")[0].value)
     }
 
     // Clear color classes

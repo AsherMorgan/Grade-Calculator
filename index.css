@@ -66,7 +66,7 @@ h3 {
     width: -moz-fit-content;
 }
 
-.pointsEarned, .pointsPossible {
+.pointsEarned, .pointsPossible, .weight {
     width: 50px;
 }
 

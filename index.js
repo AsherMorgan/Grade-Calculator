@@ -48,7 +48,12 @@ function update() {
 
     // Calculate grade percentage
     var gradePercentage = (pointsEarned / pointsPossible) * 100;
-    document.getElementById("gradePercentage").textContent = `${gradePercentage.toFixed(3)}%`;
+    if (isFinite(gradePercentage)) {
+        document.getElementById("gradePercentage").textContent = `${gradePercentage.toFixed(3)}%`;
+    }
+    else {
+        document.getElementById("gradePercentage").textContent = gradePercentage;
+    }
 
     // Set letter and color
     if (gradePercentage >= 97) {

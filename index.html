@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="index.css"/>
         <script src="index.js"></script>
     </head>
-    <body onload="addAssignment();">
+    <body onload="addCategory(); addAssignment();">
         <h1>Grade-Calculator</h1>
         
         <div>
@@ -24,25 +24,23 @@
         <div>
             <h3>Categories:</h3>
             
-            <div id="categories">
+            <template id="categoryTemplate">
                 <div>
                     <div class="category">
                         <b>Name: </b>
-                        <input class="categoryName" type="text" oninput="update();" value="Practice">
+                        <input class="categoryName" type="text" oninput="update();" value="Default Category">
                         &nbsp;
                         <b>Weight: </b>
-                        <input class="categoryWeight" type="number" oninput="update();" value="10">
+                        <input class="categoryWeight" type="number" oninput="update();" value="100">
+                        <button id="categoryRemove" class="categoryRemove">╳</button>
                     </div>
                 </div>
-                <div>
-                    <div class="category">
-                        <b>Name: </b>
-                        <input class="categoryName" type="text" oninput="update();" value="Performance">
-                        &nbsp;
-                        <b>Weight: </b>
-                        <input class="categoryWeight" type="number" oninput="update();" value="90">
-                    </div>
-                </div>
+            </template>
+            
+            <div id="categories"></div>
+            
+            <div>
+                <span id="addCategory" onclick="addCategory();">+</span>
             </div>
         </div>
 
@@ -58,10 +56,7 @@
                         <input class="pointsPossible" type="number" oninput="update();" value="10">
                         &nbsp;
                         <b>Category: </b>
-                        <select class="selectCategory" oninput="update();">
-                            <option value="10">Practice</option>
-                            <option value="90">Performance</option>
-                        </select>
+                        <select class="selectCategory" oninput="update();"></select>
                         <button id="assignmentRemove" class="assignmentRemove">╳</button>
                     </div>
                 </div>

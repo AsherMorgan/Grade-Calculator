@@ -20,19 +20,31 @@ function addAssignment() {
     // Increment assignmentID
     assignmentID++;
 
-    // Update grade
+    // Update grade and add categories
     update();
 }
 
 
 
-// Updates the final grade
+
+// Updates assignment categories and the final grade
 function update() {
+    // Get categories
+    var categories = document.getElementsByClassName("category");
+
+    // Update categories
+    for (selectCategory of document.getElementsByClassName("selectCategory")) {
+        for (var i = 0; i < categories.length; i++) {
+            selectCategory.children[i].text = categories[i].getElementsByClassName("categoryName")[0].value;
+            selectCategory.children[i].value = categories[i].getElementsByClassName("categoryWeight")[0].value;
+        }
+    }
+
     // Get assignment point totals
     var pointsEarned = 0;
     var pointsPossible = 0;
     for (assignment of document.getElementsByClassName("assignment")) {
-        weight = parseFloat(assignment.getElementsByClassName("weight")[0].value)
+        weight = parseFloat(assignment.getElementsByClassName("selectCategory")[0].value)
         pointsEarned += weight * parseFloat(assignment.getElementsByClassName("pointsEarned")[0].value)
         pointsPossible += weight * parseFloat(assignment.getElementsByClassName("pointsPossible")[0].value)
     }

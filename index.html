@@ -22,6 +22,31 @@
         </div>
 
         <div>
+            <h3>Categories:</h3>
+            
+            <div id="categories">
+                <div>
+                    <div class="category">
+                        <b>Name: </b>
+                        <input class="categoryName" type="text" oninput="update();" value="Practice">
+                        &nbsp;
+                        <b>Weight: </b>
+                        <input class="categoryWeight" type="number" oninput="update();" value="10">
+                    </div>
+                </div>
+                <div>
+                    <div class="category">
+                        <b>Name: </b>
+                        <input class="categoryName" type="text" oninput="update();" value="Performance">
+                        &nbsp;
+                        <b>Weight: </b>
+                        <input class="categoryWeight" type="number" oninput="update();" value="90">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
             <h3>Assignments:</h3>
             
             <template id="assignmentTemplate">
@@ -29,11 +54,14 @@
                     <div class="assignment">
                         <b>Score: </b>
                         <input class="pointsEarned" type="number" oninput="update();" value="10">
-                        &#47
+                        &#47;
                         <input class="pointsPossible" type="number" oninput="update();" value="10">
-                        &nbsp
-                        <b>Weight: </b>
-                        <input class="weight" type="number" oninput="update();" value="1">
+                        &nbsp;
+                        <b>Category: </b>
+                        <select class="selectCategory" oninput="update();">
+                            <option value="10">Practice</option>
+                            <option value="90">Performance</option>
+                        </select>
                         <button id="assignmentRemove" class="assignmentRemove">╳</button>
                     </div>
                 </div>

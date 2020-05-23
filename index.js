@@ -79,11 +79,11 @@ function update() {
         }
 
         // Reset index
-        if (index < options.length) {
-            selectCategory.selectedIndex = index;
+        if (index == -1 || index >= options.length) {
+            selectCategory.selectedIndex = 0;
         }
         else {
-            selectCategory.selectedIndex = 0;
+            selectCategory.selectedIndex = index;
         }
     }
 
@@ -91,9 +91,9 @@ function update() {
     var pointsEarned = 0;
     var pointsPossible = 0;
     for (assignment of document.getElementsByClassName("assignment")) {
-        weight = parseFloat(assignment.getElementsByClassName("selectCategory")[0].value)
-        pointsEarned += weight * parseFloat(assignment.getElementsByClassName("pointsEarned")[0].value)
-        pointsPossible += weight * parseFloat(assignment.getElementsByClassName("pointsPossible")[0].value)
+        weight = parseFloat(assignment.getElementsByClassName("selectCategory")[0].value) || 0;
+        pointsEarned += weight * parseFloat(assignment.getElementsByClassName("pointsEarned")[0].value);
+        pointsPossible += weight * parseFloat(assignment.getElementsByClassName("pointsPossible")[0].value);
     }
 
     // Clear color classes

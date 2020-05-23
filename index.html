@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="index.css"/>
         <script src="index.js"></script>
     </head>
-    <body onload="addAssignment();">
+    <body onload="addCategory(); addAssignment();">
         <h1>Grade-Calculator</h1>
         
         <div>
@@ -22,14 +22,41 @@
         </div>
 
         <div>
+            <h3>Categories:</h3>
+            
+            <template id="categoryTemplate">
+                <div>
+                    <div class="category">
+                        <b>Name: </b>
+                        <input class="categoryName" type="text" oninput="update();" value="Default Category">
+                        &nbsp;
+                        <b>Weight: </b>
+                        <input class="categoryWeight" type="number" oninput="update();" value="100">
+                        <button id="categoryRemove" class="categoryRemove">╳</button>
+                    </div>
+                </div>
+            </template>
+            
+            <div id="categories"></div>
+            
+            <div>
+                <span id="addCategory" onclick="addCategory();">+</span>
+            </div>
+        </div>
+
+        <div>
             <h3>Assignments:</h3>
             
             <template id="assignmentTemplate">
                 <div>
                     <div class="assignment">
+                        <b>Score: </b>
                         <input class="pointsEarned" type="number" oninput="update();" value="10">
-                        &#47
+                        &#47;
                         <input class="pointsPossible" type="number" oninput="update();" value="10">
+                        &nbsp;
+                        <b>Category: </b>
+                        <select class="selectCategory" oninput="update();"></select>
                         <button id="assignmentRemove" class="assignmentRemove">╳</button>
                     </div>
                 </div>

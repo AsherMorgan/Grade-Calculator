@@ -1,5 +1,5 @@
 // Declare global variables
-assignmentID = 0;
+itemID = 0;
 
 
 
@@ -9,33 +9,91 @@ function addAssignment() {
     var clone = document.getElementById("assignmentTemplate").content.cloneNode(true);
 
     // Set row id
-    clone.children[0].setAttribute("id", `assignment-${assignmentID}`);
+    clone.children[0].setAttribute("id", `assignment-${itemID}`);
     
     // Add remove button onclick attribute
-    clone.getElementById("assignmentRemove").setAttribute("onclick", `var element = document.getElementById('assignment-${assignmentID}'); element.parentNode.removeChild(element); update();`);
+    clone.getElementById("assignmentRemove").setAttribute("onclick", `var element = document.getElementById('assignment-${itemID}'); element.parentNode.removeChild(element); update();`);
     
     // Add row
     document.getElementById("assignments").appendChild(clone);
     
-    // Increment assignmentID
-    assignmentID++;
+    // Increment itemID
+    itemID++;
 
-    // Update grade
+    // Update grade and add category options
     update();
 }
 
 
 
-// Updates the final grade
+// Adds a category
+function addCategory() {
+    // Create row
+    var clone = document.getElementById("categoryTemplate").content.cloneNode(true);
+
+    // Set row id
+    clone.children[0].setAttribute("id", `category-${itemID}`);
+    
+    // Add remove button onclick attribute
+    clone.getElementById("categoryRemove").setAttribute("onclick", `var element = document.getElementById('category-${itemID}'); element.parentNode.removeChild(element); update();`);
+    
+    // Add row
+    document.getElementById("categories").appendChild(clone);
+    
+    // Increment itemID
+    itemID++;
+
+    // Update category options
+    update();
+}
+
+
+
+// Updates assignment categories and the final grade
 function update() {
+    // Get category options
+    var options = []
+    for (category of document.getElementsByClassName("category")) {
+        // Create option
+        var option = document.createElement('option');
+
+        // Set option properties
+        option.text = category.getElementsByClassName("categoryName")[0].value;
+        option.value = category.getElementsByClassName("categoryWeight")[0].value;
+
+        // Add option
+        options.push(option)
+    }
+
+    // Update categories
+    for (selectCategory of document.getElementsByClassName("selectCategory")) {
+        // Get index of currently selected category
+        var index = selectCategory.selectedIndex;
+
+        // Remove existing category actions
+        selectCategory.innerHTML = "";
+
+        // Set category options
+        for (option of options) {
+            selectCategory.appendChild(option.cloneNode(true));
+        }
+
+        // Reset index
+        if (index == -1 || index >= options.length) {
+            selectCategory.selectedIndex = 0;
+        }
+        else {
+            selectCategory.selectedIndex = index;
+        }
+    }
+
     // Get assignment point totals
     var pointsEarned = 0;
-    for (assignment of document.getElementsByClassName("pointsEarned")) {
-        pointsEarned += parseFloat(assignment.value);
-    }
     var pointsPossible = 0;
-    for (assignment of document.getElementsByClassName("pointsPossible")) {
-        pointsPossible += parseFloat(assignment.value);
+    for (assignment of document.getElementsByClassName("assignment")) {
+        weight = parseFloat(assignment.getElementsByClassName("selectCategory")[0].value) || 0;
+        pointsEarned += weight * parseFloat(assignment.getElementsByClassName("pointsEarned")[0].value);
+        pointsPossible += weight * parseFloat(assignment.getElementsByClassName("pointsPossible")[0].value);
     }
 
     // Clear color classes

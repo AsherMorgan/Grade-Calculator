@@ -68,16 +68,10 @@ h3 {
 
 
 /******** Item styles ********/
-.assignment, .category {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5px;
-    margin-bottom: 5px;
+#assignments, #categories {
+    margin: auto;
+    background-color: #F0F0F0;
     padding: 5px;
-    border-radius: 5px;
-    background-color: #E0E0E0;
-    width: fit-content;
-    width: -moz-fit-content;
 }
 
 .pointsEarned, .pointsPossible, .categoryWeight {
@@ -85,9 +79,8 @@ h3 {
 }
 
 .assignmentRemove, .categoryRemove {
-    border: none;
-    background-color: #E0E0E0;
     cursor: pointer;
+    padding: 5px;
 }
 
 #addAssignment, #addCategory {

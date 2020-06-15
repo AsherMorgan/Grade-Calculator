@@ -27,19 +27,26 @@
             <h3>Categories:</h3>
             
             <template id="categoryTemplate">
-                <div>
-                    <div class="category">
-                        <b>Name: </b>
+                <tr class="category">
+                    <td>
                         <input class="categoryName" type="text" oninput="update();" value="Default Category">
-                        &nbsp;
-                        <b>Weight: </b>
+                    </td>
+                    <td>
                         <input class="categoryWeight" type="number" oninput="update();" value="100">
-                        <button id="categoryRemove" class="categoryRemove">╳</button>
-                    </div>
-                </div>
+                    </td>
+                    <td>
+                        <a id="categoryRemove" class="categoryRemove">╳</a>
+                    </td>
+                </tr>
             </template>
             
-            <div id="categories"></div>
+            <table id="categories">
+                <tr>
+                    <td>Name</td>
+                    <td>Weight</td>
+                    <td></td>
+                </tr>
+            </table>
             
             <div>
                 <span id="addCategory" onclick="addCategory();">+</span>
@@ -50,21 +57,30 @@
             <h3>Assignments:</h3>
             
             <template id="assignmentTemplate">
-                <div>
-                    <div class="assignment">
-                        <b>Score: </b>
+                <tr class="assignment">
+                    <td>
                         <input class="pointsEarned" type="number" oninput="update();" value="10">
-                        &#47;
+                    </td>
+                    <td>/</td>
+                    <td>
                         <input class="pointsPossible" type="number" oninput="update();" value="10">
-                        &nbsp;
-                        <b>Category: </b>
+                    </td>
+                    <td>
                         <select class="selectCategory" oninput="update();"></select>
-                        <button id="assignmentRemove" class="assignmentRemove">╳</button>
-                    </div>
-                </div>
+                    </td>
+                    <td>
+                        <a id="assignmentRemove" class="assignmentRemove">╳</a>
+                    </td>
+                </tr>
             </template>
             
-            <div id="assignments"></div>
+            <table id="assignments">
+                <thead>
+                    <td colspan="3">Score</td>
+                    <td>Category</td>
+                    <td></td>
+                </thead>
+            </table>
             
             <div>
                 <span id="addAssignment" onclick="addAssignment();">+</span>

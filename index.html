@@ -59,11 +59,11 @@
             <template id="assignmentTemplate">
                 <tr class="assignment">
                     <td>
-                        <input class="pointsEarned" type="number" oninput="update();" value="10" min="0" step="0.1">
+                        <input id="pointsEarned" class="pointsEarned" type="number" oninput="update();" min="0" step="0.1">
                     </td>
                     <td>/</td>
                     <td>
-                        <input class="pointsPossible" type="number" oninput="update();" value="10" min="0" step="0.1">
+                        <input id="pointsPossible" class="pointsPossible" type="number" oninput="update();" min="0" step="0.1">
                     </td>
                     <td>
                         <select class="selectCategory" oninput="update();"></select>

@@ -4,12 +4,16 @@ itemID = 0;
 
 
 // Adds an assignment
-function addAssignment() {
+function addAssignment(pointsEarned = 10, pointsPossible = 10) {
     // Create row
     var clone = document.getElementById("assignmentTemplate").content.cloneNode(true);
 
     // Set row id
     clone.children[0].setAttribute("id", `assignment-${itemID}`);
+    
+    // Set grade
+    clone.getElementById("pointsEarned").value = pointsEarned;
+    clone.getElementById("pointsPossible").value = pointsPossible;
     
     // Add remove button onclick attribute
     clone.getElementById("assignmentRemove").setAttribute("onclick", `var element = document.getElementById('assignment-${itemID}'); element.parentNode.removeChild(element); update();`);

@@ -31,12 +31,16 @@ function addAssignment(pointsEarned = 10, pointsPossible = 10) {
 
 
 // Adds a category
-function addCategory() {
+function addCategory(weight = 100, name = "Default Category") {
     // Create row
     var clone = document.getElementById("categoryTemplate").content.cloneNode(true);
 
     // Set row id
     clone.children[0].setAttribute("id", `category-${itemID}`);
+    
+    // Set weight and name
+    clone.getElementById("categoryWeight").value = weight;
+    clone.getElementById("categoryName").value = name;
     
     // Add remove button onclick attribute
     clone.getElementById("categoryRemove").setAttribute("onclick", `var element = document.getElementById('category-${itemID}'); element.parentNode.removeChild(element); update();`);

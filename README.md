@@ -2,7 +2,7 @@
 A program to calculate your final grade given a list of assignments that are or will be in the gradebook.
 
 ## Letter grades
-The following scale is used to determine letter grades. Grades above 100% or below 0% will be marked as A+ and F respectively.
+The following scale is used to determine letter grades. Grades above 100% or below 0% will be marked as A+ and F respectively. Grades are rounded before a letter grade is assigned.
 | Letter Grade | Range    |
 | ------------ | -------- |
 | A+           | 97 - 100 |

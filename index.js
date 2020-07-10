@@ -96,12 +96,19 @@ function update() {
     }
 
     // Get assignment point totals
-    var pointsEarned = 0;
-    var pointsPossible = 0;
+    let totalEarned = 0;
+    let totalPossible = 0;
     for (assignment of document.getElementsByClassName("assignment")) {
-        weight = parseFloat(assignment.getElementsByClassName("selectCategory")[0].value) || 0;
-        pointsEarned += weight * parseFloat(assignment.getElementsByClassName("pointsEarned")[0].value);
-        pointsPossible += weight * parseFloat(assignment.getElementsByClassName("pointsPossible")[0].value);
+        // Get assignment data
+        let weight = parseFloat(assignment.getElementsByClassName("selectCategory")[0].value);
+        let pointsEarned = parseFloat(assignment.getElementsByClassName("pointsEarned")[0].value);
+        let pointsPossible = parseFloat(assignment.getElementsByClassName("pointsPossible")[0].value);
+
+        // Add to point totals
+        if (!isNaN(weight) && !isNaN(pointsEarned) && !isNaN(pointsPossible)) {
+            totalEarned += weight * pointsEarned;
+            totalPossible += weight * pointsPossible;
+        }
     }
 
     // Clear color classes
@@ -113,7 +120,7 @@ function update() {
     gradeElement.classList.remove("letterF");
 
     // Calculate grade percentage
-    var gradePercentage = (pointsEarned / pointsPossible) * 100;
+    let gradePercentage = (totalEarned / totalPossible) * 100;
 
     // Set grade percentage
     if (isFinite(gradePercentage)) {

@@ -190,3 +190,26 @@ function update() {
         document.getElementById("gradeLetter").textContent = "";
     }
 }
+
+
+
+// Import grades from a JSON string
+function importJSON(rawJson) {
+    // Parse JSON
+    let json = JSON.parse(rawJson);
+
+    // Remove existing assignments
+    for (let assignment of document.getElementsByClassName("assignment"))  {
+        assignment.parentNode.removeChild(assignment);
+    }
+
+    // Iterate over assignments
+    for (let key in json) {
+        // Get assignment info
+        let earned = json[key]["pointsEarned"];
+        let possible = json[key]["pointsPossible"];
+        
+        // Add assignment
+        addAssignment(earned, possible);
+    }
+}

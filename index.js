@@ -193,23 +193,46 @@ function update() {
 
 
 
-// Import grades from a JSON string
-function importJSON(rawJson) {
-    // Parse JSON
-    let json = JSON.parse(rawJson);
+// Opens the import div
+function openImportDiv() {
+    document.getElementById("mainContainer").hidden = true;
+    document.getElementById("importContainer").hidden = false;
+}
 
-    // Remove existing assignments
-    for (let assignment of document.getElementsByClassName("assignment"))  {
-        assignment.parentNode.removeChild(assignment);
+
+
+// Closes the import div
+function closeImportDiv() {
+    document.getElementById("importBox").value = "";
+    document.getElementById("importContainer").hidden = true;
+    document.getElementById("mainContainer").hidden = false;
+}
+
+
+
+// Import grades
+function importJSON() {
+    try {
+        // Parse JSON
+        let json = JSON.parse(document.getElementById("importBox").value);
+
+        // Remove existing assignments
+        for (let assignment of document.getElementsByClassName("assignment"))  {
+            assignment.parentNode.removeChild(assignment);
+        }
+
+        // Iterate over assignments
+        for (let key in json) {
+            // Get assignment info
+            let earned = json[key]["pointsEarned"];
+            let possible = json[key]["pointsPossible"];
+            
+            // Add assignment
+            addAssignment(earned, possible);
+        }
     }
-
-    // Iterate over assignments
-    for (let key in json) {
-        // Get assignment info
-        let earned = json[key]["pointsEarned"];
-        let possible = json[key]["pointsPossible"];
-        
-        // Add assignment
-        addAssignment(earned, possible);
+    finally {
+        // Close import div
+        closeImportDiv();
     }
 }

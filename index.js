@@ -228,6 +228,9 @@ function importJSON() {
             let earned = json[key]["pointsEarned"];
             let possible = json[key]["pointsPossible"];
             
+            if (!isFinite(earned)) { earned = null; }
+            if (!isFinite(possible)) { possible = null; }
+            
             // Add assignment
             addAssignment(earned, possible);
         }

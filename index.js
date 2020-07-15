@@ -217,8 +217,9 @@ function importJSON() {
         let json = JSON.parse(document.getElementById("importBox").value);
 
         // Remove existing assignments
-        for (let assignment of document.getElementsByClassName("assignment"))  {
-            assignment.parentNode.removeChild(assignment);
+        let assignments = document.getElementsByClassName("assignment");
+        while (assignments.length > 0) {
+            assignment.parentNode.removeChild(assignments[0]);
         }
 
         // Iterate over assignments

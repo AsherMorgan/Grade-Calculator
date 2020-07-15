@@ -14,16 +14,14 @@
             <h1>Grade-Calculator</h1>
         </div>
         
-        <div>
+        <div id="mainContainer">
             <h3>Final Grade:</h3>
             
             <div id="grade">
                 <label id="gradePercentage"></label>
                 <label id="gradeLetter"></label>
             </div>
-        </div>
 
-        <div>
             <h3>Categories:</h3>
             
             <template id="categoryTemplate">
@@ -51,10 +49,11 @@
             <div>
                 <span id="addCategory" onclick="addCategory();">+</span>
             </div>
-        </div>
 
-        <div>
-            <h3>Assignments:</h3>
+            <h3>
+                Assignments:
+                <button onclick="openImportDiv();">Import</button>
+            </h3>
             
             <template id="assignmentTemplate">
                 <tr class="assignment">
@@ -84,6 +83,17 @@
             
             <div>
                 <span id="addAssignment" onclick="addAssignment();">+</span>
+            </div>
+        </div>
+
+        <div id="importContainer" hidden>
+            <h3 style="margin-top: 0px;">Paste JSON string here:</h3>
+            <textarea rows="15" id="importBox" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off"
+                placeholder="[&#010;  {&#010;    &quot;pointsEarned&quot;:10,&#010;    &quot;pointsPossible&quot;:10&#010;  },&#010;  {&#010;    &quot;pointsEarned&quot;:4,&#010;    &quot;pointsPossible&quot;:5&#010;  }&#010;]">
+            </textarea>
+            <div id="importButtons">
+                <button onclick="closeImportDiv();" id="importCancelButton">Cancel</button>
+                <button onclick="importJSON();" id="importParseButton">Import JSON</button>
             </div>
         </div>
     </body>

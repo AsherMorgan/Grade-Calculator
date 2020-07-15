@@ -190,3 +190,53 @@ function update() {
         document.getElementById("gradeLetter").textContent = "";
     }
 }
+
+
+
+// Opens the import div
+function openImportDiv() {
+    document.getElementById("mainContainer").hidden = true;
+    document.getElementById("importContainer").hidden = false;
+}
+
+
+
+// Closes the import div
+function closeImportDiv() {
+    document.getElementById("importBox").value = "";
+    document.getElementById("importContainer").hidden = true;
+    document.getElementById("mainContainer").hidden = false;
+}
+
+
+
+// Import grades
+function importJSON() {
+    try {
+        // Parse JSON
+        let json = JSON.parse(document.getElementById("importBox").value);
+
+        // Remove existing assignments
+        let assignments = document.getElementsByClassName("assignment");
+        while (assignments.length > 0) {
+            assignment.parentNode.removeChild(assignments[0]);
+        }
+
+        // Iterate over assignments
+        for (let key in json) {
+            // Get assignment info
+            let earned = json[key]["pointsEarned"];
+            let possible = json[key]["pointsPossible"];
+            
+            if (!isFinite(earned)) { earned = null; }
+            if (!isFinite(possible)) { possible = null; }
+            
+            // Add assignment
+            addAssignment(earned, possible);
+        }
+    }
+    finally {
+        // Close import div
+        closeImportDiv();
+    }
+}

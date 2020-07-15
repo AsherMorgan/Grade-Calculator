@@ -23,6 +23,10 @@ h3 {
     margin-bottom: 5px;
 }
 
+button {
+    height: 25px;
+}
+
 
 
 /******** Grade styles ********/
@@ -95,4 +99,31 @@ h3 {
     border: none;
     border-radius: 50%;
     cursor: pointer
+}
+
+
+
+/******** JSON importer styles ********/
+#importContainer {
+    margin: auto;
+    width: 300px;
+    background-color: #F0F0F0;
+    padding: 10px;
+}
+
+#importBox {
+    width: 100%;
+    resize: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+
+#importButtons {
+    text-align: left;
+}
+
+#importParseButton {
+    float: right;
 }

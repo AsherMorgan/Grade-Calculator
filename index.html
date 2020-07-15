@@ -87,9 +87,12 @@
         </div>
 
         <div id="importContainer" hidden>
-            <textarea style="display: block; margin: auto; width: 300px;" rows="15" id="importBox" placeholder="Paste JSON string here..."></textarea>
-            <button onclick="closeImportDiv();">Cancel</button>
-            <button onclick="importJSON();">Import JSON</button>
+            <h3 style="margin-top: 0px;">Paste JSON string here:</h3>
+            <textarea rows="15" id="importBox" placeholder="[&#010;  {&#010;    &quot;pointsEarned&quot;:10,&#010;    &quot;pointsPossible&quot;:10&#010;  },&#010;  {&#010;    &quot;pointsEarned&quot;:4,&#010;    &quot;pointsPossible&quot;:5&#010;  }&#010;]"></textarea>
+            <div id="importButtons">
+                <button onclick="closeImportDiv();" id="importCancelButton">Cancel</button>
+                <button onclick="importJSON();" id="importParseButton">Import JSON</button>
+            </div>
         </div>
     </body>
 </html>

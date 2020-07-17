@@ -4,7 +4,7 @@ itemID = 0;
 
 
 // Adds an assignment
-function addAssignment(pointsEarned = 10, pointsPossible = 10) {
+function addAssignment(pointsEarned = null, pointsPossible = null) {
     // Create row
     var clone = document.getElementById("assignmentTemplate").content.cloneNode(true);
 
@@ -31,7 +31,7 @@ function addAssignment(pointsEarned = 10, pointsPossible = 10) {
 
 
 // Adds a category
-function addCategory(weight = 100, name = "Default Category") {
+function addCategory(weight = null, name = "New Category") {
     // Create row
     var clone = document.getElementById("categoryTemplate").content.cloneNode(true);
 

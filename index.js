@@ -6,7 +6,7 @@ itemID = 0;
 // Adds an assignment
 function addAssignment(pointsEarned = null, pointsPossible = null) {
     // Create row
-    var clone = document.getElementById("assignmentTemplate").content.cloneNode(true);
+    let clone = document.getElementById("assignmentTemplate").content.cloneNode(true);
 
     // Set row id
     clone.children[0].setAttribute("id", `assignment-${itemID}`);
@@ -16,7 +16,7 @@ function addAssignment(pointsEarned = null, pointsPossible = null) {
     clone.getElementById("pointsPossible").value = pointsPossible;
     
     // Add remove button onclick attribute
-    clone.getElementById("assignmentRemove").setAttribute("onclick", `var element = document.getElementById('assignment-${itemID}'); element.parentNode.removeChild(element); update();`);
+    clone.getElementById("assignmentRemove").setAttribute("onclick", `let element = document.getElementById('assignment-${itemID}'); element.parentNode.removeChild(element); update();`);
     
     // Add row
     document.getElementById("assignments").appendChild(clone);
@@ -33,7 +33,7 @@ function addAssignment(pointsEarned = null, pointsPossible = null) {
 // Adds a category
 function addCategory(weight = null, name = "New Category") {
     // Create row
-    var clone = document.getElementById("categoryTemplate").content.cloneNode(true);
+    let clone = document.getElementById("categoryTemplate").content.cloneNode(true);
 
     // Set row id
     clone.children[0].setAttribute("id", `category-${itemID}`);
@@ -43,7 +43,7 @@ function addCategory(weight = null, name = "New Category") {
     clone.getElementById("categoryName").value = name;
     
     // Add remove button onclick attribute
-    clone.getElementById("categoryRemove").setAttribute("onclick", `var element = document.getElementById('category-${itemID}'); element.parentNode.removeChild(element); update();`);
+    clone.getElementById("categoryRemove").setAttribute("onclick", `let element = document.getElementById('category-${itemID}'); element.parentNode.removeChild(element); update();`);
     
     // Add row
     document.getElementById("categories").appendChild(clone);
@@ -60,10 +60,10 @@ function addCategory(weight = null, name = "New Category") {
 // Updates assignment categories and the final grade
 function update() {
     // Get category options
-    var options = []
+    let options = []
     for (category of document.getElementsByClassName("category")) {
         // Create option
-        var option = document.createElement('option');
+        let option = document.createElement('option');
 
         // Set option properties
         option.text = category.getElementsByClassName("categoryName")[0].value;
@@ -76,7 +76,7 @@ function update() {
     // Update categories
     for (selectCategory of document.getElementsByClassName("selectCategory")) {
         // Get index of currently selected category
-        var index = selectCategory.selectedIndex;
+        let index = selectCategory.selectedIndex;
 
         // Remove existing category actions
         selectCategory.innerHTML = "";

@@ -31,7 +31,7 @@ function addAssignment(pointsEarned = null, pointsPossible = null) {
 
 
 // Adds a category
-function addCategory(weight = null, name = "New Category") {
+function addCategory(weight = 0, name = "New Category") {
     // Create row
     let clone = document.getElementById("categoryTemplate").content.cloneNode(true);
 

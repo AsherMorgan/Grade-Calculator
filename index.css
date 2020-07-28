@@ -1,9 +1,22 @@
+/******** Variable styles ********/
+:root {
+    --theme-color: #87bd6c;
+    --foreground-color: #000000;
+    --background-color: #ffffff;
+    --container-color: #f0f0f0;
+    --add-button-color: #e0e0e0;
+}
+
+
+
 /******** Body styles ********/
 body {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     touch-action: manipulation;
     margin-top: 80px;
+    background-color: var(--background-color);
+    color: var(--foreground-color);
 }
 
 h1 {
@@ -16,7 +29,7 @@ h1 {
     top: 0px;
     left: 0px;
     width: 100%;
-    background-color: #87BD6C;
+    background-color: var(--theme-color);
 }
 
 h3 {
@@ -33,12 +46,13 @@ button {
 #grade {
     width: 120px;
     padding: 10px;
-    border: 1px solid #000000;
+    border: 1px solid var(--foreground-color);
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
+    color: var(--foreground-color);
 }
 
 #gradePercentage {
@@ -74,7 +88,7 @@ button {
 /******** Item styles ********/
 #assignments, #categories {
     margin: auto;
-    background-color: #F0F0F0;
+    background-color: var(--container-color);
     padding: 5px;
 }
 
@@ -95,7 +109,7 @@ button {
     width: 40px;
     line-height: 40px;
     font-size: 40px;
-    background-color: #E0E0E0;
+    background-color: var(--add-button-color);
     border: none;
     border-radius: 50%;
     cursor: pointer
@@ -107,7 +121,7 @@ button {
 #importContainer {
     margin: auto;
     width: 300px;
-    background-color: #F0F0F0;
+    background-color: var(--container-color);
     padding: 10px;
 }
 

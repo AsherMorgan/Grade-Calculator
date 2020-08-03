@@ -83,8 +83,10 @@ button {
 }
 
 .assignmentRemove, .categoryRemove {
+    border: none;
+    padding: 0px;
+    margin: 0px;
     cursor: pointer;
-    padding: 5px;
 }
 
 #addAssignment, #addCategory {

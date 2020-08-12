@@ -161,3 +161,19 @@ textarea:focus, input:focus {
 #importParseButton {
     float: right;
 }
+
+
+
+/******** Dark styles ********/
+body.dark {
+    --theme-color: #597b37;
+    --foreground-color: #e0e0e0;
+    --background-color: #121416;
+    --container-color: #323436;
+    --add-button-color: #505050;
+    --border-color: #606060;
+}
+
+.dark h1, .dark #grade {
+    color: #000000;
+}

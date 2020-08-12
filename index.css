@@ -5,6 +5,7 @@
     --background-color: #ffffff;
     --container-color: #f0f0f0;
     --add-button-color: #e0e0e0;
+    --border-color: #808080;
 }
 
 
@@ -36,8 +37,26 @@ h3 {
     margin-bottom: 5px;
 }
 
+
+
+/******** Element styles ********/
+input, textarea, select, button {
+    color: var(--foreground-color);
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+}
+
 button {
     height: 25px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--add-button-color);
+}
+
+textarea:focus, input:focus {
+    border: 1px solid var(--foreground-color);
 }
 
 
@@ -96,9 +115,10 @@ button {
     width: 50px;
 }
 
-.assignmentRemove, .categoryRemove {
+.assignmentRemove, .categoryRemove, .dark .assignmentRemove, .dark .categoryRemove {
     cursor: pointer;
     padding: 5px;
+    color: var(--foreground-color);
 }
 
 #addAssignment, #addCategory {

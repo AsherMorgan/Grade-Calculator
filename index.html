@@ -20,7 +20,7 @@
                 <h2>Final Grade:</h2>
                 
                 <div id="grade" :style="{ 'background-color': color }">
-                    <label id="gradePercentage">{{ percentage }}</label>
+                    <label id="gradePercentage">{{ percentage.toFixed(3) }}</label>
                     <label id="gradeLetter">{{ letter }}</label>
                 </div>
     

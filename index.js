@@ -1,28 +1,33 @@
-// Declare global variables
-itemID = 0;
+// Declare Vue app
+let app;
 
-var app;
+
+
+// Initialize Vue
 function load() {
     app = new Vue({
-        el: "main",
+        el: "main", // Mount to <main/>
+        
         data: {
-            importingJson: false,
-            jsonInput: "",
-            assignments: [
+            importingJson: false,   // Whether the JSON importer is visible
+            jsonInput: "",          // The text in the JSON importer textarea
+            categories: [           // The list of categories
+                {
+                    "name": "Category 1",
+                    "weight": 100,
+                }
+            ],
+            assignments: [          // The list of assignments
                 {
                     "pointsEarned": 10,
                     "pointsPossible": 10,
                     "categoryIndex":0,
                 }
             ],
-            categories: [
-                {
-                    "name": "Category 1",
-                    "weight": 100,
-                }
-            ]
         },
+
         methods: {
+            // Adds a blank assignment
             addAssignment: function() {
                 this.assignments.push({
                     "pointsEarned": null,
@@ -30,15 +35,27 @@ function load() {
                     "categoryIndex": 0,
                 });
             },
+
+            // Remove an assignment
             removeAssignment: function(index) {
+                // Remove assignment
                 this.assignments.splice(index, 1);
+
+                // Ensure there is at least one assignment
+                if (this.assignments.length === 0) {
+                    this.addAssignment();
+                }
             },
+
+            // Add a blank category
             addCategory: function() {
                 this.categories.push({
                     "name": "New category",
                     "weight": 0,
                 });
             },
+
+            // Removes a category
             removeCategory: function(index) {
                 // Correct assignment category indexes
                 for (assignment of this.assignments) {
@@ -52,7 +69,14 @@ function load() {
 
                 // Remove category
                 this.categories.splice(index, 1);
+
+                // Ensure there is at least one category
+                if (this.categories.length === 0) {
+                    this.addCategory();
+                }
             },
+
+            // Imports JSON from the JSON importer
             importJSON: function() {
                 try {
                     // Parse JSON
@@ -79,12 +103,14 @@ function load() {
                     }
                 }
                 finally {
-                    // Close import div
+                    // Close JSON importer
                     this.importingJson = false;
                 }
             }
         },
+
         computed: {
+            // Gets the final grade as a percentage
             percentage: function() {
                 // Get assignment point totals
                 let totalEarned = 0;
@@ -92,11 +118,11 @@ function load() {
                 for (assignment of this.assignments) {
                     // Get assignment data
                     let weight = this.categories[assignment.categoryIndex].weight
-                    let pointsEarned = assignment.pointsEarned;
-                    let pointsPossible = assignment.pointsPossible;
+                    let pointsEarned = parseFloat(assignment.pointsEarned);
+                    let pointsPossible = parseFloat(assignment.pointsPossible);
 
                     // Add to point totals
-                    if (weight !== null && pointsEarned !== null && pointsPossible !== null) {
+                    if (isNumber(weight) && isNumber(pointsEarned) && isNumber(pointsPossible)) {
                         totalEarned += weight * pointsEarned;
                         totalPossible += weight * pointsPossible;
                     }
@@ -106,8 +132,10 @@ function load() {
                 let gradePercentage = (totalEarned / totalPossible) * 100;
 
                 // Return grade percentage
-                return gradePercentage.toFixed(3);
+                return gradePercentage;
             },
+
+            // Gets the final letter grade
             letter: function() {
                 // Get grade percentage
                 gradePercentage = this.percentage;
@@ -149,13 +177,15 @@ function load() {
                 else if (gradePercentage >= 60) {
                     return "D-";
                 }
-                else if (gradePercentage || gradePercentage === 0) {
+                else if (isNumber(gradePercentage)) {
                     return "F";
                 }
                 else {
                     return "";
                 }
             },
+
+            // Gets the final grade color 
             color: function() {
                 // Get grade letter
                 letter = this.letter;
@@ -179,12 +209,21 @@ function load() {
                     case "D-":
                         return "#F9AC48";
                     case "F":
-                    default:
                         return "#EF3D3D";
+                    case "":
+                    default:
+                        return "#808080";
                 }
             }
         }
     });
+}
+
+
+
+// Determines if a value is a number
+function isNumber(value) {
+    return typeof(value) === "number" && !isNaN(value);
 }
 
 

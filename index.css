@@ -184,3 +184,7 @@ body.dark {
 .dark h1, .dark #grade {
     color: #000000;
 }
+
+.dark a {
+    color: #0080ff;
+}

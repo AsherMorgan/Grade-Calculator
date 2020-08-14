@@ -11,7 +11,7 @@
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="index.js"></script>
     </head>
-    <body onload="UpdateTheme(); load(); update();">
+    <body onload="UpdateTheme(); load();">
         <div id="title">
             <h1>Grade-Calculator</h1>
         </div>
@@ -20,9 +20,9 @@
             <div id="mainContainer">
                 <h3>Final Grade:</h3>
                 
-                <div id="grade">
-                    <label id="gradePercentage"></label>
-                    <label id="gradeLetter"></label>
+                <div id="grade" :style="{ 'background-color': color }">
+                    <label id="gradePercentage">{{ percentage }}</label>
+                    <label id="gradeLetter">{{ letter }}</label>
                 </div>
     
                 <h3>Categories:</h3>
@@ -34,12 +34,12 @@
                         <td></td>
                     </thead>
                     <tbody v-for="(category, index) in categories">
-                        <tr class="category">
+                        <tr>
                             <td>
-                                <input class="categoryName" type="text" v-model="category.name" oninput="update();">
+                                <input type="text" v-model="category.name">
                             </td>
                             <td>
-                                <input class="categoryWeight" type="number" min="0" v-model="category.weight" oninput="update();">
+                                <input type="number" min="0" v-model="category.weight">
                             </td>
                             <td>
                                 <button class="categoryRemove" @click="removeCategory(index)">╳</button>
@@ -65,17 +65,17 @@
                         <td></td>
                     </thead>
                     <tbody v-for="(assignment, index) in assignments">
-                        <tr class="assignment">
+                        <tr>
                             <td>
-                                <input class="pointsEarned" type="number" min="0" step="any" v-model="assignment.pointsEarned" oninput="update();">
+                                <input type="number" min="0" step="any" v-model="assignment.pointsEarned">
                             </td>
                             <td>/</td>
                             <td>
-                                <input class="pointsPossible" type="number" min="0" step="any" v-model="assignment.pointsPossible" oninput="update();">
+                                <input type="number" min="0" step="any" v-model="assignment.pointsPossible">
                             </td>
                             <td>
-                                <select class="selectCategory" oninput="update();">
-                                    <option v-for="category in categories" :value="category.weight">
+                                <select class="selectCategory" v-model="assignment.categoryIndex">
+                                    <option v-for="(category, index) in categories" :value="index">
                                         {{ category.name }}
                                     </option>
                                 </select>

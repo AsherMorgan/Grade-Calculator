@@ -17,7 +17,7 @@
         </div>
         
         <main>
-            <div id="mainContainer">
+            <div id="mainContainer" v-show="!importingJson">
                 <h3>Final Grade:</h3>
                 
                 <div id="grade" :style="{ 'background-color': color }">
@@ -42,19 +42,19 @@
                                 <input type="number" min="0" v-model="category.weight">
                             </td>
                             <td>
-                                <button class="categoryRemove" @click="removeCategory(index)">╳</button>
+                                <button class="categoryRemove" @click="removeCategory(index);">╳</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 
                 <div>
-                    <span id="addCategory" @click="addCategory">+</span>
+                    <span id="addCategory" @click="addCategory();">+</span>
                 </div>
     
                 <h3>
                     Assignments:
-                    <button onclick="openImportDiv();">Import</button>
+                    <button @click="importingJson = true;">Import</button>
                 </h3>
                 
                 
@@ -81,24 +81,24 @@
                                 </select>
                             </td>
                             <td>
-                                <button class="assignmentRemove" @click="removeAssignment(index)">╳</button>
+                                <button class="assignmentRemove" @click="removeAssignment(index);">╳</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 
                 <div>
-                    <span id="addAssignment" @click="addAssignment">+</span>
+                    <span id="addAssignment" @click="addAssignment();">+</span>
                 </div>
             </div>
     
-            <div id="importContainer" hidden>
+            <div id="importContainer" v-show="importingJson">
                 <h3 style="margin-top: 0px;">Paste JSON string here:</h3>
-                <textarea rows="15" id="importBox" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off"
+                <textarea v-model="jsonInput" rows="15" id="importBox" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off"
                     placeholder="[&#010;  {&#010;    &quot;pointsEarned&quot;:10,&#010;    &quot;pointsPossible&quot;:10&#010;  },&#010;  {&#010;    &quot;pointsEarned&quot;:4,&#010;    &quot;pointsPossible&quot;:5&#010;  }&#010;]"></textarea>
                 <div id="importButtons">
-                    <button onclick="closeImportDiv();" id="importCancelButton">Cancel</button>
-                    <button onclick="importJSON();" id="importParseButton">Import JSON</button>
+                    <button @click="importingJson = false;" id="importCancelButton">Cancel</button>
+                    <button @click="importJSON();" id="importParseButton">Import JSON</button>
                 </div>
             </div>
         </main>

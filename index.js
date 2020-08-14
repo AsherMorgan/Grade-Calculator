@@ -6,6 +6,8 @@ function load() {
     app = new Vue({
         el: "main",
         data: {
+            importingJson: false,
+            jsonInput: "",
             assignments: [
                 {
                     "pointsEarned": 10,
@@ -50,6 +52,36 @@ function load() {
 
                 // Remove category
                 this.categories.splice(index, 1);
+            },
+            importJSON: function() {
+                try {
+                    // Parse JSON
+                    let json = JSON.parse(this.jsonInput);
+            
+                    // Iterate over assignments
+                    newAssignments = []
+                    for (let key in json) {
+                        // Get point values
+                        pointsEarned = isFinite(json[key]["pointsEarned"]) ? json[key]["pointsEarned"] : null;
+                        pointsPossible = isFinite(json[key]["pointsPossible"]) ? json[key]["pointsPossible"] : null;
+                        
+                        // Add assignment
+                        newAssignments.push({
+                            "pointsEarned": pointsEarned,
+                            "pointsPossible": pointsPossible,
+                            "categoryIndex": 0,
+                        });
+                    }
+
+                    // Set assignments
+                    if (newAssignments.length > 0) {
+                        this.assignments = newAssignments;
+                    }
+                }
+                finally {
+                    // Close import div
+                    this.importingJson = false;
+                }
             }
         },
         computed: {
@@ -194,54 +226,4 @@ function UpdateTheme(theme = null) {
 
     // Save theme
     localStorage.setItem("theme", theme);
-}
-
-
-
-// Opens the import div
-function openImportDiv() {
-    document.getElementById("mainContainer").hidden = true;
-    document.getElementById("importContainer").hidden = false;
-}
-
-
-
-// Closes the import div
-function closeImportDiv() {
-    document.getElementById("importBox").value = "";
-    document.getElementById("importContainer").hidden = true;
-    document.getElementById("mainContainer").hidden = false;
-}
-
-
-
-// Import grades
-function importJSON() {
-    try {
-        // Parse JSON
-        let json = JSON.parse(document.getElementById("importBox").value);
-
-        // Remove existing assignments
-        let assignments = document.getElementsByClassName("assignment");
-        while (assignments.length > 0) {
-            assignment.parentNode.removeChild(assignments[0]);
-        }
-
-        // Iterate over assignments
-        for (let key in json) {
-            // Get assignment info
-            let earned = json[key]["pointsEarned"];
-            let possible = json[key]["pointsPossible"];
-            
-            if (!isFinite(earned)) { earned = null; }
-            if (!isFinite(possible)) { possible = null; }
-            
-            // Add assignment
-            addAssignment(earned, possible);
-        }
-    }
-    finally {
-        // Close import div
-        closeImportDiv();
-    }
 }

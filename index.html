@@ -7,25 +7,24 @@
         <link rel="icon" type="image/png" href="Images/favicon-32.png">
         <link rel="apple-touch-icon" sizes="180x180" href="Images/apple-touch-icon.png">
         <link rel="stylesheet" href="index.css"/>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script> -->
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
         <script src="index.js"></script>
     </head>
     <body onload="UpdateTheme(); load();">
-        <div id="title">
+        <header>
             <h1>Grade-Calculator</h1>
-        </div>
+        </header>
         
         <main>
             <div id="mainContainer" v-show="!importingJson">
-                <h3>Final Grade:</h3>
+                <h2>Final Grade:</h2>
                 
                 <div id="grade" :style="{ 'background-color': color }">
                     <label id="gradePercentage">{{ percentage }}</label>
                     <label id="gradeLetter">{{ letter }}</label>
                 </div>
     
-                <h3>Categories:</h3>
+                <h2>Categories:</h2>
                 
                 <table id="categories">
                     <thead>
@@ -42,21 +41,20 @@
                                 <input type="number" min="0" v-model="category.weight">
                             </td>
                             <td>
-                                <button class="categoryRemove" @click="removeCategory(index);">╳</button>
+                                <button class="removeItem" @click="removeCategory(index);">╳</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 
                 <div>
-                    <span id="addCategory" @click="addCategory();">+</span>
+                    <span class="addItem" @click="addCategory();">+</span>
                 </div>
     
-                <h3>
+                <h2>
                     Assignments:
                     <button @click="importingJson = true;">Import</button>
-                </h3>
-                
+                </h2>
                 
                 <table id="assignments">
                     <thead>
@@ -74,26 +72,26 @@
                                 <input type="number" min="0" step="any" v-model="assignment.pointsPossible">
                             </td>
                             <td>
-                                <select class="selectCategory" v-model="assignment.categoryIndex">
+                                <select v-model="assignment.categoryIndex">
                                     <option v-for="(category, index) in categories" :value="index">
                                         {{ category.name }}
                                     </option>
                                 </select>
                             </td>
                             <td>
-                                <button class="assignmentRemove" @click="removeAssignment(index);">╳</button>
+                                <button class="removeItem" @click="removeAssignment(index);">╳</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 
                 <div>
-                    <span id="addAssignment" @click="addAssignment();">+</span>
+                    <span class="addItem" @click="addAssignment();">+</span>
                 </div>
             </div>
     
             <div id="importContainer" v-show="importingJson">
-                <h3 style="margin-top: 0px;">Paste JSON string here:</h3>
+                <h2 style="margin-top: 0px;">Paste JSON string here:</h2>
                 <textarea v-model="jsonInput" rows="15" id="importBox" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off"
                     placeholder="[&#010;  {&#010;    &quot;pointsEarned&quot;:10,&#010;    &quot;pointsPossible&quot;:10&#010;  },&#010;  {&#010;    &quot;pointsEarned&quot;:4,&#010;    &quot;pointsPossible&quot;:5&#010;  }&#010;]"></textarea>
                 <div id="importButtons">

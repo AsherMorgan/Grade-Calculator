@@ -60,7 +60,7 @@ button {
     cursor: pointer;
 }
 
-button:hover:enabled:not(.assignmentRemove, .categoryRemove) {
+button:hover:enabled:not(.assignmentRemove):not(.categoryRemove) {
     background-color: var(--add-button-color);
 }
 

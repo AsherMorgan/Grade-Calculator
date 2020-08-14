@@ -1,9 +1,23 @@
+/******** Variable styles ********/
+:root {
+    --theme-color: #87bd6c;
+    --foreground-color: #000000;
+    --background-color: #ffffff;
+    --container-color: #f0f0f0;
+    --add-button-color: #e0e0e0;
+    --border-color: #808080;
+}
+
+
+
 /******** Body styles ********/
 body {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     touch-action: manipulation;
     margin-top: 80px;
+    background-color: var(--background-color);
+    color: var(--foreground-color);
 }
 
 h1 {
@@ -16,15 +30,40 @@ h1 {
     top: 0px;
     left: 0px;
     width: 100%;
-    background-color: #87BD6C;
+    background-color: var(--theme-color);
 }
 
 h3 {
     margin-bottom: 5px;
 }
 
+footer {
+    position: fixed;
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+
+
+/******** Element styles ********/
+input, textarea, select, button {
+    color: var(--foreground-color);
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+}
+
 button {
     height: 25px;
+    cursor: pointer;
+}
+
+button:hover:enabled:not(.assignmentRemove, .categoryRemove) {
+    background-color: var(--add-button-color);
+}
+
+textarea:focus, input:focus {
+    border: 1px solid var(--foreground-color);
 }
 
 
@@ -33,12 +72,13 @@ button {
 #grade {
     width: 120px;
     padding: 10px;
-    border: 1px solid #000000;
+    border: 1px solid var(--foreground-color);
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
+    color: var(--foreground-color);
 }
 
 #gradePercentage {
@@ -74,7 +114,7 @@ button {
 /******** Item styles ********/
 #assignments, #categories {
     margin: auto;
-    background-color: #F0F0F0;
+    background-color: var(--container-color);
     padding: 5px;
 }
 
@@ -82,7 +122,9 @@ button {
     width: 50px;
 }
 
-.assignmentRemove, .categoryRemove {
+.assignmentRemove, .categoryRemove, .dark .assignmentRemove, .dark .categoryRemove {
+    color: var(--foreground-color);
+    background-color: var(--container-color);
     border: none;
     padding: 0px;
     margin: 0px;
@@ -97,7 +139,7 @@ button {
     width: 40px;
     line-height: 40px;
     font-size: 40px;
-    background-color: #E0E0E0;
+    background-color: var(--add-button-color);
     border: none;
     border-radius: 50%;
     cursor: pointer
@@ -109,7 +151,7 @@ button {
 #importContainer {
     margin: auto;
     width: 275px;
-    background-color: #F0F0F0;
+    background-color: var(--container-color);
     padding: 10px;
 }
 
@@ -128,4 +170,24 @@ button {
 
 #importParseButton {
     float: right;
+}
+
+
+
+/******** Dark styles ********/
+body.dark {
+    --theme-color: #597b37;
+    --foreground-color: #e0e0e0;
+    --background-color: #121416;
+    --container-color: #323436;
+    --add-button-color: #505050;
+    --border-color: #606060;
+}
+
+.dark h1, .dark #grade {
+    color: #000000;
+}
+
+.dark a {
+    color: #0080ff;
 }

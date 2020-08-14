@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="index.css"/>
         <script src="index.js"></script>
     </head>
-    <body onload="addCategory(100, 'Category 1'); addAssignment(10, 10);">
+    <body onload="UpdateTheme(); addCategory(100, 'Category 1'); addAssignment(10, 10);">
         <div id="title">
             <h1>Grade-Calculator</h1>
         </div>
@@ -95,5 +95,10 @@
                 <button onclick="importJSON();" id="importParseButton">Import JSON</button>
             </div>
         </div>
+
+        <footer>
+            <!-- Link updated in UpdateTheme method -->
+            <a id="toggleTheme"></a>
+        </footer>
     </body>
 </html>

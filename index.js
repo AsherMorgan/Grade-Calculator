@@ -1,6 +1,51 @@
 // Declare global variables
 itemID = 0;
 
+var app;
+function load() {
+    app = new Vue({
+        el: "main",
+        data: {
+            assignments: [
+                {
+                    "pointsEarned": 10,
+                    "pointsPossible": 10,
+                }
+            ],
+            categories: [
+                {
+                    "name": "Category 1",
+                    "weight": 100,
+                }
+            ]
+        },
+        methods: {
+            addAssignment: function() {
+                this.assignments.push({
+                    "pointsEarned": null,
+                    "pointsPossible": null,
+                });
+                update();
+            },
+            removeAssignment: function(index) {
+                this.assignments.splice(index, 1)
+                update();
+            },
+            addCategory: function() {
+                this.categories.push({
+                    "name": "New category",
+                    "weight": 0,
+                });
+                update();
+            },
+            removeCategory: function(index) {
+                this.categories.splice(index, 1)
+                update();
+            }
+        },
+    });
+}
+
 
 
 // Updates the interface theme
@@ -44,98 +89,8 @@ function UpdateTheme(theme = null) {
 
 
 
-// Adds an assignment
-function addAssignment(pointsEarned = null, pointsPossible = null) {
-    // Create row
-    let clone = document.getElementById("assignmentTemplate").content.cloneNode(true);
-
-    // Set row id
-    clone.children[0].setAttribute("id", `assignment-${itemID}`);
-    
-    // Set grade
-    clone.getElementById("pointsEarned").value = pointsEarned;
-    clone.getElementById("pointsPossible").value = pointsPossible;
-    
-    // Add remove button onclick attribute
-    clone.getElementById("assignmentRemove").setAttribute("onclick", `let element = document.getElementById('assignment-${itemID}'); element.parentNode.removeChild(element); update();`);
-    
-    // Add row
-    document.getElementById("assignments").appendChild(clone);
-    
-    // Increment itemID
-    itemID++;
-
-    // Update grade and add category options
-    update();
-}
-
-
-
-// Adds a category
-function addCategory(weight = 0, name = "New Category") {
-    // Create row
-    let clone = document.getElementById("categoryTemplate").content.cloneNode(true);
-
-    // Set row id
-    clone.children[0].setAttribute("id", `category-${itemID}`);
-    
-    // Set weight and name
-    clone.getElementById("categoryWeight").value = weight;
-    clone.getElementById("categoryName").value = name;
-    
-    // Add remove button onclick attribute
-    clone.getElementById("categoryRemove").setAttribute("onclick", `let element = document.getElementById('category-${itemID}'); element.parentNode.removeChild(element); update();`);
-    
-    // Add row
-    document.getElementById("categories").appendChild(clone);
-    
-    // Increment itemID
-    itemID++;
-
-    // Update category options
-    update();
-}
-
-
-
-// Updates assignment categories and the final grade
+// Updates the final grade
 function update() {
-    // Get category options
-    let options = []
-    for (category of document.getElementsByClassName("category")) {
-        // Create option
-        let option = document.createElement('option');
-
-        // Set option properties
-        option.text = category.getElementsByClassName("categoryName")[0].value;
-        option.value = category.getElementsByClassName("categoryWeight")[0].value;
-
-        // Add option
-        options.push(option)
-    }
-
-    // Update categories
-    for (selectCategory of document.getElementsByClassName("selectCategory")) {
-        // Get index of currently selected category
-        let index = selectCategory.selectedIndex;
-
-        // Remove existing category actions
-        selectCategory.innerHTML = "";
-
-        // Set category options
-        for (option of options) {
-            selectCategory.appendChild(option.cloneNode(true));
-        }
-
-        // Reset index
-        if (index == -1 || index >= options.length) {
-            selectCategory.selectedIndex = 0;
-        }
-        else {
-            selectCategory.selectedIndex = index;
-        }
-    }
-
     // Get assignment point totals
     let totalEarned = 0;
     let totalPossible = 0;

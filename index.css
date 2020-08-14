@@ -120,7 +120,7 @@ textarea:focus, input:focus {
     padding: 5px;
 }
 
-.pointsEarned, .pointsPossible, .categoryWeight {
+input[type=number] {
     width: 50px;
 }
 

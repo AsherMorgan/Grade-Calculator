@@ -7,94 +7,101 @@
         <link rel="icon" type="image/png" href="Images/favicon-32.png">
         <link rel="apple-touch-icon" sizes="180x180" href="Images/apple-touch-icon.png">
         <link rel="stylesheet" href="index.css"/>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="index.js"></script>
     </head>
-    <body onload="UpdateTheme(); addCategory(100, 'Category 1'); addAssignment(10, 10);">
+    <body onload="UpdateTheme(); load(); update();">
         <div id="title">
             <h1>Grade-Calculator</h1>
         </div>
         
-        <div id="mainContainer">
-            <h3>Final Grade:</h3>
-            
-            <div id="grade">
-                <label id="gradePercentage"></label>
-                <label id="gradeLetter"></label>
+        <main>
+            <div id="mainContainer">
+                <h3>Final Grade:</h3>
+                
+                <div id="grade">
+                    <label id="gradePercentage"></label>
+                    <label id="gradeLetter"></label>
+                </div>
+    
+                <h3>Categories:</h3>
+                
+                <table id="categories">
+                    <thead>
+                        <td>Name</td>
+                        <td>Weight</td>
+                        <td></td>
+                    </thead>
+                    <tbody v-for="(category, index) in categories">
+                        <tr class="category">
+                            <td>
+                                <input class="categoryName" type="text" v-model="category.name" oninput="update();">
+                            </td>
+                            <td>
+                                <input class="categoryWeight" type="number" min="0" v-model="category.weight" oninput="update();">
+                            </td>
+                            <td>
+                                <button class="categoryRemove" @click="removeCategory(index)">╳</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div>
+                    <span id="addCategory" @click="addCategory">+</span>
+                </div>
+    
+                <h3>
+                    Assignments:
+                    <button onclick="openImportDiv();">Import</button>
+                </h3>
+                
+                
+                <table id="assignments">
+                    <thead>
+                        <td colspan="3">Score</td>
+                        <td>Category</td>
+                        <td></td>
+                    </thead>
+                    <tbody v-for="(assignment, index) in assignments">
+                        <tr class="assignment">
+                            <td>
+                                <input class="pointsEarned" type="number" min="0" step="any" v-model="assignment.pointsEarned" oninput="update();">
+                            </td>
+                            <td>/</td>
+                            <td>
+                                <input class="pointsPossible" type="number" min="0" step="any" v-model="assignment.pointsPossible" oninput="update();">
+                            </td>
+                            <td>
+                                <select class="selectCategory" oninput="update();">
+                                    <option v-for="category in categories" :value="category.weight">
+                                        {{ category.name }}
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <button class="assignmentRemove" @click="removeAssignment(index)">╳</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div>
+                    <span id="addAssignment" @click="addAssignment">+</span>
+                </div>
             </div>
-
-            <h3>Categories:</h3>
-            
-            <template id="categoryTemplate">
-                <tr class="category">
-                    <td>
-                        <input id="categoryName" class="categoryName" type="text" oninput="update();">
-                    </td>
-                    <td>
-                        <input id="categoryWeight" class="categoryWeight" type="number" oninput="update();" min="0">
-                    </td>
-                    <td>
-                        <button id="categoryRemove" class="categoryRemove">╳</button>
-                    </td>
-                </tr>
-            </template>
-            
-            <table id="categories">
-                <tr>
-                    <td>Name</td>
-                    <td>Weight</td>
-                    <td></td>
-                </tr>
-            </table>
-            
-            <div>
-                <span id="addCategory" onclick="addCategory();">+</span>
+    
+            <div id="importContainer" hidden>
+                <h3 style="margin-top: 0px;">Paste JSON string here:</h3>
+                <textarea rows="15" id="importBox" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off"
+                    placeholder="[&#010;  {&#010;    &quot;pointsEarned&quot;:10,&#010;    &quot;pointsPossible&quot;:10&#010;  },&#010;  {&#010;    &quot;pointsEarned&quot;:4,&#010;    &quot;pointsPossible&quot;:5&#010;  }&#010;]"></textarea>
+                <div id="importButtons">
+                    <button onclick="closeImportDiv();" id="importCancelButton">Cancel</button>
+                    <button onclick="importJSON();" id="importParseButton">Import JSON</button>
+                </div>
             </div>
-
-            <h3>
-                Assignments:
-                <button onclick="openImportDiv();">Import</button>
-            </h3>
-            
-            <template id="assignmentTemplate">
-                <tr class="assignment">
-                    <td>
-                        <input id="pointsEarned" class="pointsEarned" type="number" oninput="update();" min="0" step="any">
-                    </td>
-                    <td>/</td>
-                    <td>
-                        <input id="pointsPossible" class="pointsPossible" type="number" oninput="update();" min="0" step="any">
-                    </td>
-                    <td>
-                        <select class="selectCategory" oninput="update();"></select>
-                    </td>
-                    <td>
-                        <button id="assignmentRemove" class="assignmentRemove">╳</button>
-                    </td>
-                </tr>
-            </template>
-            
-            <table id="assignments">
-                <thead>
-                    <td colspan="3">Score</td>
-                    <td>Category</td>
-                    <td></td>
-                </thead>
-            </table>
-            
-            <div>
-                <span id="addAssignment" onclick="addAssignment();">+</span>
-            </div>
-        </div>
-
-        <div id="importContainer" hidden>
-            <h3 style="margin-top: 0px;">Paste JSON string here:</h3>
-            <textarea rows="15" id="importBox" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off"
-                placeholder="[&#010;  {&#010;    &quot;pointsEarned&quot;:10,&#010;    &quot;pointsPossible&quot;:10&#010;  },&#010;  {&#010;    &quot;pointsEarned&quot;:4,&#010;    &quot;pointsPossible&quot;:5&#010;  }&#010;]"></textarea>
-            <div id="importButtons">
-                <button onclick="closeImportDiv();" id="importCancelButton">Cancel</button>
-                <button onclick="importJSON();" id="importParseButton">Import JSON</button>
-            </div>
-        </div>
+        </main>
 
         <footer>
             <!-- Link updated in UpdateTheme method -->

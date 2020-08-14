@@ -58,7 +58,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+button:hover:enabled:not(.assignmentRemove, .categoryRemove) {
     background-color: var(--add-button-color);
 }
 
@@ -123,9 +123,12 @@ textarea:focus, input:focus {
 }
 
 .assignmentRemove, .categoryRemove, .dark .assignmentRemove, .dark .categoryRemove {
-    cursor: pointer;
-    padding: 5px;
     color: var(--foreground-color);
+    background-color: var(--container-color);
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    cursor: pointer;
 }
 
 #addAssignment, #addCategory {
@@ -147,7 +150,7 @@ textarea:focus, input:focus {
 /******** JSON importer styles ********/
 #importContainer {
     margin: auto;
-    width: 300px;
+    width: 275px;
     background-color: var(--container-color);
     padding: 10px;
 }

@@ -37,6 +37,13 @@ h3 {
     margin-bottom: 5px;
 }
 
+footer {
+    position: fixed;
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
+}
+
 
 
 /******** Element styles ********/

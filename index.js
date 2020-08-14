@@ -3,6 +3,47 @@ itemID = 0;
 
 
 
+// Updates the interface theme
+function UpdateTheme(theme = null) {
+    // Get theme from localStorage
+    if (theme === null) {
+        theme = localStorage.getItem("theme");
+    }
+
+    // Detect preferred color scheme
+    if (theme === null) {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            theme = "Dark";
+        }
+        else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            theme = "Light";
+        }
+    }
+    
+    // Apply theme
+    if (theme === "Dark") {
+        // Add dark class
+        document.body.classList.add("dark");
+    
+        // Update toggle
+        document.getElementById("toggleTheme").textContent = "Light theme";
+        document.getElementById("toggleTheme").href = "javascript:UpdateTheme('Light');";
+    }
+    else {
+        // Add light class
+        document.body.classList.remove("dark");
+    
+        // Update toggle
+        document.getElementById("toggleTheme").textContent = "Dark theme";
+        document.getElementById("toggleTheme").href = "javascript:UpdateTheme('Dark');";
+    }
+
+    // Save theme
+    localStorage.setItem("theme", theme);
+}
+
+
+
 // Adds an assignment
 function addAssignment(pointsEarned = null, pointsPossible = null) {
     // Create row

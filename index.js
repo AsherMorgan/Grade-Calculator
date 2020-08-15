@@ -145,7 +145,7 @@ function load() {
                 let totalPossible = 0;
                 for (assignment of this.assignments) {
                     // Get assignment data
-                    let weight = this.categories[assignment.categoryIndex].weight
+                    let weight = parseFloat(this.categories[assignment.categoryIndex].weight);
                     let pointsEarned = parseFloat(assignment.pointsEarned);
                     let pointsPossible = parseFloat(assignment.pointsPossible);
 

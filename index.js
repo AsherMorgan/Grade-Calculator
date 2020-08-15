@@ -1,283 +1,258 @@
-// Declare global variables
-itemID = 0;
+// Declare Vue app
+let app;
 
 
 
-// Updates the interface theme
-function UpdateTheme(theme = null) {
-    // Get theme from localStorage
-    if (theme === null) {
-        theme = localStorage.getItem("theme");
-    }
+// Initialize Vue
+function load() {
+    app = new Vue({
+        el: "#app", // Mount to app div
+        
+        data: {
+            darkTheme: false,       // Whether or not dark theme is enabled
+            importingJson: false,   // Whether the JSON importer is visible
+            jsonInput: "",          // The text in the JSON importer textarea
+            categories: [           // The list of categories
+                {
+                    "name": "Category 1",
+                    "weight": 100,
+                }
+            ],
+            assignments: [          // The list of assignments
+                {
+                    "pointsEarned": 10,
+                    "pointsPossible": 10,
+                    "categoryIndex":0,
+                }
+            ],
+        },
 
-    // Detect preferred color scheme
-    if (theme === null) {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            theme = "Dark";
-        }
-        else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-            theme = "Light";
-        }
-    }
-    
-    // Apply theme
-    if (theme === "Dark") {
-        // Add dark class
-        document.body.classList.add("dark");
-    
-        // Update toggle
-        document.getElementById("toggleTheme").textContent = "Light theme";
-        document.getElementById("toggleTheme").href = "javascript:UpdateTheme('Light');";
-    }
-    else {
-        // Add light class
-        document.body.classList.remove("dark");
-    
-        // Update toggle
-        document.getElementById("toggleTheme").textContent = "Dark theme";
-        document.getElementById("toggleTheme").href = "javascript:UpdateTheme('Dark');";
-    }
+        methods: {
+            // Adds a blank assignment
+            addAssignment: function() {
+                this.assignments.push({
+                    "pointsEarned": null,
+                    "pointsPossible": null,
+                    "categoryIndex": 0,
+                });
+            },
 
-    // Save theme
-    localStorage.setItem("theme", theme);
-}
+            // Remove an assignment
+            removeAssignment: function(index) {
+                // Remove assignment
+                this.assignments.splice(index, 1);
 
+                // Ensure there is at least one assignment
+                if (this.assignments.length === 0) {
+                    this.addAssignment();
+                }
+            },
 
+            // Add a blank category
+            addCategory: function() {
+                this.categories.push({
+                    "name": "New category",
+                    "weight": 0,
+                });
+            },
 
-// Adds an assignment
-function addAssignment(pointsEarned = null, pointsPossible = null) {
-    // Create row
-    let clone = document.getElementById("assignmentTemplate").content.cloneNode(true);
+            // Removes a category
+            removeCategory: function(index) {
+                // Correct assignment category indexes
+                for (assignment of this.assignments) {
+                    if (assignment.categoryIndex == index) {
+                        assignment.categoryIndex = 0;
+                    }
+                    else if (assignment.categoryIndex > index) {
+                        assignment.categoryIndex--;
+                    }
+                }
 
-    // Set row id
-    clone.children[0].setAttribute("id", `assignment-${itemID}`);
-    
-    // Set grade
-    clone.getElementById("pointsEarned").value = pointsEarned;
-    clone.getElementById("pointsPossible").value = pointsPossible;
-    
-    // Add remove button onclick attribute
-    clone.getElementById("assignmentRemove").setAttribute("onclick", `let element = document.getElementById('assignment-${itemID}'); element.parentNode.removeChild(element); update();`);
-    
-    // Add row
-    document.getElementById("assignments").appendChild(clone);
-    
-    // Increment itemID
-    itemID++;
+                // Remove category
+                this.categories.splice(index, 1);
 
-    // Update grade and add category options
-    update();
-}
+                // Ensure there is at least one category
+                if (this.categories.length === 0) {
+                    this.addCategory();
+                }
+            },
 
-
-
-// Adds a category
-function addCategory(weight = 0, name = "New Category") {
-    // Create row
-    let clone = document.getElementById("categoryTemplate").content.cloneNode(true);
-
-    // Set row id
-    clone.children[0].setAttribute("id", `category-${itemID}`);
-    
-    // Set weight and name
-    clone.getElementById("categoryWeight").value = weight;
-    clone.getElementById("categoryName").value = name;
-    
-    // Add remove button onclick attribute
-    clone.getElementById("categoryRemove").setAttribute("onclick", `let element = document.getElementById('category-${itemID}'); element.parentNode.removeChild(element); update();`);
-    
-    // Add row
-    document.getElementById("categories").appendChild(clone);
-    
-    // Increment itemID
-    itemID++;
-
-    // Update category options
-    update();
-}
-
-
-
-// Updates assignment categories and the final grade
-function update() {
-    // Get category options
-    let options = []
-    for (category of document.getElementsByClassName("category")) {
-        // Create option
-        let option = document.createElement('option');
-
-        // Set option properties
-        option.text = category.getElementsByClassName("categoryName")[0].value;
-        option.value = category.getElementsByClassName("categoryWeight")[0].value;
-
-        // Add option
-        options.push(option)
-    }
-
-    // Update categories
-    for (selectCategory of document.getElementsByClassName("selectCategory")) {
-        // Get index of currently selected category
-        let index = selectCategory.selectedIndex;
-
-        // Remove existing category actions
-        selectCategory.innerHTML = "";
-
-        // Set category options
-        for (option of options) {
-            selectCategory.appendChild(option.cloneNode(true));
-        }
-
-        // Reset index
-        if (index == -1 || index >= options.length) {
-            selectCategory.selectedIndex = 0;
-        }
-        else {
-            selectCategory.selectedIndex = index;
-        }
-    }
-
-    // Get assignment point totals
-    let totalEarned = 0;
-    let totalPossible = 0;
-    for (assignment of document.getElementsByClassName("assignment")) {
-        // Get assignment data
-        let weight = parseFloat(assignment.getElementsByClassName("selectCategory")[0].value);
-        let pointsEarned = parseFloat(assignment.getElementsByClassName("pointsEarned")[0].value);
-        let pointsPossible = parseFloat(assignment.getElementsByClassName("pointsPossible")[0].value);
-
-        // Add to point totals
-        if (!isNaN(weight) && !isNaN(pointsEarned) && !isNaN(pointsPossible)) {
-            totalEarned += weight * pointsEarned;
-            totalPossible += weight * pointsPossible;
-        }
-    }
-
-    // Clear color classes
-    gradeElement = document.getElementById("grade");
-    gradeElement.classList.remove("letterA");
-    gradeElement.classList.remove("letterB");
-    gradeElement.classList.remove("letterC");
-    gradeElement.classList.remove("letterD");
-    gradeElement.classList.remove("letterF");
-
-    // Calculate grade percentage
-    let gradePercentage = (totalEarned / totalPossible) * 100;
-
-    // Set grade percentage
-    if (isFinite(gradePercentage)) {
-        document.getElementById("gradePercentage").textContent = `${gradePercentage.toFixed(3)}%`;
-    }
-    else {
-        document.getElementById("gradePercentage").textContent = gradePercentage;
-    }
-
-    // Round grade percentage (only effects letter grades)
-    gradePercentage = Math.round(gradePercentage);
-
-    // Set letter and color
-    if (gradePercentage >= 97) {
-        gradeElement.classList.add("letterA");
-        document.getElementById("gradeLetter").textContent = "A+";
-    }
-    else if (gradePercentage >= 93) {
-        gradeElement.classList.add("letterA");
-        document.getElementById("gradeLetter").textContent = "A";
-    }
-    else if (gradePercentage >= 90) {
-        gradeElement.classList.add("letterA");
-        document.getElementById("gradeLetter").textContent = "A-";
-    }
-    else if (gradePercentage >= 87) {
-        gradeElement.classList.add("letterB");
-        document.getElementById("gradeLetter").textContent = "B+";
-    }
-    else if (gradePercentage >= 83) {
-        gradeElement.classList.add("letterB");
-        document.getElementById("gradeLetter").textContent = "B";
-    }
-    else if (gradePercentage >= 80) {
-        gradeElement.classList.add("letterB");
-        document.getElementById("gradeLetter").textContent = "B-";
-    }
-    else if (gradePercentage >= 77) {
-        gradeElement.classList.add("letterC");
-        document.getElementById("gradeLetter").textContent = "C+";
-    }
-    else if (gradePercentage >= 73) {
-        gradeElement.classList.add("letterC");
-        document.getElementById("gradeLetter").textContent = "C";
-    }
-    else if (gradePercentage >= 70) {
-        gradeElement.classList.add("letterC");
-        document.getElementById("gradeLetter").textContent = "C-";
-    }
-    else if (gradePercentage >= 67) {
-        gradeElement.classList.add("letterD");
-        document.getElementById("gradeLetter").textContent = "D+";
-    }
-    else if (gradePercentage >= 63) {
-        gradeElement.classList.add("letterD");
-        document.getElementById("gradeLetter").textContent = "D";
-    }
-    else if (gradePercentage >= 60) {
-        gradeElement.classList.add("letterD");
-        document.getElementById("gradeLetter").textContent = "D-";
-    }
-    else if (gradePercentage || gradePercentage === 0) {
-        gradeElement.classList.add("letterF");
-        document.getElementById("gradeLetter").textContent = "F";
-    }
-    else {
-        document.getElementById("gradeLetter").textContent = "";
-    }
-}
-
-
-
-// Opens the import div
-function openImportDiv() {
-    document.getElementById("mainContainer").hidden = true;
-    document.getElementById("importContainer").hidden = false;
-}
-
-
-
-// Closes the import div
-function closeImportDiv() {
-    document.getElementById("importBox").value = "";
-    document.getElementById("importContainer").hidden = true;
-    document.getElementById("mainContainer").hidden = false;
-}
-
-
-
-// Import grades
-function importJSON() {
-    try {
-        // Parse JSON
-        let json = JSON.parse(document.getElementById("importBox").value);
-
-        // Remove existing assignments
-        let assignments = document.getElementsByClassName("assignment");
-        while (assignments.length > 0) {
-            assignment.parentNode.removeChild(assignments[0]);
-        }
-
-        // Iterate over assignments
-        for (let key in json) {
-            // Get assignment info
-            let earned = json[key]["pointsEarned"];
-            let possible = json[key]["pointsPossible"];
+            // Imports JSON from the JSON importer
+            importJSON: function() {
+                try {
+                    // Parse JSON
+                    let json = JSON.parse(this.jsonInput);
             
-            if (!isFinite(earned)) { earned = null; }
-            if (!isFinite(possible)) { possible = null; }
+                    // Iterate over assignments
+                    newAssignments = []
+                    for (let key in json) {
+                        // Get point values
+                        pointsEarned = isFinite(json[key]["pointsEarned"]) ? json[key]["pointsEarned"] : null;
+                        pointsPossible = isFinite(json[key]["pointsPossible"]) ? json[key]["pointsPossible"] : null;
+                        
+                        // Add assignment
+                        newAssignments.push({
+                            "pointsEarned": pointsEarned,
+                            "pointsPossible": pointsPossible,
+                            "categoryIndex": 0,
+                        });
+                    }
+
+                    // Set assignments
+                    if (newAssignments.length > 0) {
+                        this.assignments = newAssignments;
+                    }
+                }
+                finally {
+                    // Close JSON importer
+                    this.importingJson = false;
+                }
+            },
             
-            // Add assignment
-            addAssignment(earned, possible);
+            // Updates the interface theme
+            updateTheme: function(darkTheme = null) {
+                // Get theme from localStorage
+                if (darkTheme === null) {
+                    darkTheme = JSON.parse(localStorage.getItem("darkTheme"));
+                }
+
+                // Detect preferred color scheme
+                if (darkTheme === null) {
+                    darkTheme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+                }
+                
+                // Set theme
+                this.darkTheme = darkTheme
+
+                // Apply theme
+                if (this.darkTheme) {
+                    document.body.classList.add("dark");
+                }
+                else {
+                    document.body.classList.remove("dark");
+                }
+
+                // Save theme
+                localStorage.setItem("darkTheme", darkTheme);
+            },
+        },
+
+        computed: {
+            // Gets the final grade as a percentage
+            percentage: function() {
+                // Get assignment point totals
+                let totalEarned = 0;
+                let totalPossible = 0;
+                for (assignment of this.assignments) {
+                    // Get assignment data
+                    let weight = parseFloat(this.categories[assignment.categoryIndex].weight);
+                    let pointsEarned = parseFloat(assignment.pointsEarned);
+                    let pointsPossible = parseFloat(assignment.pointsPossible);
+
+                    // Add to point totals
+                    if (isNumber(weight) && isNumber(pointsEarned) && isNumber(pointsPossible)) {
+                        totalEarned += weight * pointsEarned;
+                        totalPossible += weight * pointsPossible;
+                    }
+                }
+
+                // Calculate grade percentage
+                let gradePercentage = (totalEarned / totalPossible) * 100;
+
+                // Return grade percentage
+                return gradePercentage;
+            },
+
+            // Gets the final letter grade
+            letter: function() {
+                // Get grade percentage
+                gradePercentage = this.percentage;
+                
+                // Return letter
+                if (gradePercentage >= 97) {
+                    return "A+";
+                }
+                else if (gradePercentage >= 93) {
+                    return "A";
+                }
+                else if (gradePercentage >= 90) {
+                    return "A-";
+                }
+                else if (gradePercentage >= 87) {
+                    return "B+";
+                }
+                else if (gradePercentage >= 83) {
+                    return "B";
+                }
+                else if (gradePercentage >= 80) {
+                    return "B-";
+                }
+                else if (gradePercentage >= 77) {
+                    return "C+";
+                }
+                else if (gradePercentage >= 73) {
+                    return "C";
+                }
+                else if (gradePercentage >= 70) {
+                    return "C-";
+                }
+                else if (gradePercentage >= 67) {
+                    return "D+";
+                }
+                else if (gradePercentage >= 63) {
+                    return "D";
+                }
+                else if (gradePercentage >= 60) {
+                    return "D-";
+                }
+                else if (isNumber(gradePercentage)) {
+                    return "F";
+                }
+                else {
+                    return "";
+                }
+            },
+
+            // Gets the final grade color 
+            color: function() {
+                // Get grade letter
+                letter = this.letter;
+
+                // Return color
+                switch (letter) {
+                    case "A+":
+                    case "A":
+                    case "A-":
+                        return "#87BD6C";
+                    case "B+":
+                    case "B":
+                    case "B-":
+                        return "#CFE7FF";
+                    case "C+":
+                    case "C":
+                    case "C-":
+                        return "#FFFF8D";
+                    case "D+":
+                    case "D":
+                    case "D-":
+                        return "#F9AC48";
+                    case "F":
+                        return "#EF3D3D";
+                    case "":
+                    default:
+                        return "#808080";
+                }
+            }
         }
-    }
-    finally {
-        // Close import div
-        closeImportDiv();
-    }
+    });
+
+    // Update theme on load
+    app.updateTheme();
+}
+
+
+
+// Determines if a value is a number
+function isNumber(value) {
+    return typeof(value) === "number" && !isNaN(value);
 }

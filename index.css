@@ -26,7 +26,7 @@ h1 {
     margin-bottom: 15px;
 }
 
-#title {
+header {
     position: fixed;
     top: 0px;
     left: 0px;
@@ -34,8 +34,9 @@ h1 {
     background-color: var(--theme-color);
 }
 
-h3 {
+h2 {
     margin-bottom: 5px;
+    font-size: 20px;
 }
 
 footer {
@@ -60,7 +61,7 @@ button {
     cursor: pointer;
 }
 
-button:hover:enabled:not(.assignmentRemove):not(.categoryRemove) {
+button:hover:enabled:not(.removeItem) {
     background-color: var(--add-button-color);
 }
 
@@ -91,26 +92,6 @@ textarea:focus, input:focus {
     margin-left: 10px;
 }
 
-.letterA {
-    background-color: #87BD6C;
-}
-
-.letterB {
-    background-color: #CFE7FF;
-}
-
-.letterC {
-    background-color: #FFFF8D;
-}
-
-.letterD {
-    background-color: #F9AC48;
-}
-
-.letterF {
-    background-color: #EF3D3D;
-}
-
 
 
 /******** Item styles ********/
@@ -120,11 +101,11 @@ textarea:focus, input:focus {
     padding: 5px;
 }
 
-.pointsEarned, .pointsPossible, .categoryWeight {
+input[type=number] {
     width: 50px;
 }
 
-.assignmentRemove, .categoryRemove, .dark .assignmentRemove, .dark .categoryRemove {
+.removeItem, .dark .removeItem {
     color: var(--foreground-color);
     background-color: var(--container-color);
     border: none;
@@ -133,7 +114,7 @@ textarea:focus, input:focus {
     cursor: pointer;
 }
 
-#addAssignment, #addCategory {
+.addItem {
     display: inline-block;
     margin-top: 10px;
     padding: 0px;

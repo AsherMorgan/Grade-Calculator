@@ -10,100 +10,101 @@
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
         <script src="index.js"></script>
     </head>
-    <body onload="UpdateTheme(); load();">
-        <header>
-            <h1>Grade-Calculator</h1>
-        </header>
+    <body onload="load();">
+        <div id="app">
+            <header>
+                <h1>Grade-Calculator</h1>
+            </header>
+            
+            <main>
+                <div id="mainContainer" v-show="!importingJson">
+                    <h2>Final Grade:</h2>
+                    
+                    <div id="grade" :style="{ 'background-color': color }">
+                        <label id="gradePercentage">{{ percentage.toFixed(3) }}</label>
+                        <label id="gradeLetter">{{ letter }}</label>
+                    </div>
         
-        <main>
-            <div id="mainContainer" v-show="!importingJson">
-                <h2>Final Grade:</h2>
-                
-                <div id="grade" :style="{ 'background-color': color }">
-                    <label id="gradePercentage">{{ percentage.toFixed(3) }}</label>
-                    <label id="gradeLetter">{{ letter }}</label>
+                    <h2>Categories:</h2>
+                    
+                    <table id="categories">
+                        <thead>
+                            <td>Name</td>
+                            <td>Weight</td>
+                            <td></td>
+                        </thead>
+                        <tbody v-for="(category, index) in categories">
+                            <tr>
+                                <td>
+                                    <input type="text" v-model="category.name">
+                                </td>
+                                <td>
+                                    <input type="number" min="0" v-model="category.weight">
+                                </td>
+                                <td>
+                                    <button class="removeItem" @click="removeCategory(index);">╳</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div>
+                        <span class="addItem" @click="addCategory();">+</span>
+                    </div>
+        
+                    <h2>
+                        Assignments:
+                        <button @click="importingJson = true;">Import</button>
+                    </h2>
+                    
+                    <table id="assignments">
+                        <thead>
+                            <td colspan="3">Score</td>
+                            <td>Category</td>
+                            <td></td>
+                        </thead>
+                        <tbody v-for="(assignment, index) in assignments">
+                            <tr>
+                                <td>
+                                    <input type="number" min="0" step="any" v-model="assignment.pointsEarned">
+                                </td>
+                                <td>/</td>
+                                <td>
+                                    <input type="number" min="0" step="any" v-model="assignment.pointsPossible">
+                                </td>
+                                <td>
+                                    <select v-model="assignment.categoryIndex">
+                                        <option v-for="(category, index) in categories" :value="index">
+                                            {{ category.name }}
+                                        </option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button class="removeItem" @click="removeAssignment(index);">╳</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div>
+                        <span class="addItem" @click="addAssignment();">+</span>
+                    </div>
                 </div>
+        
+                <div id="importContainer" v-show="importingJson">
+                    <h2 style="margin-top: 0px;">Paste JSON string here:</h2>
+                    <textarea v-model="jsonInput" rows="15" id="importBox" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off"
+                        placeholder="[&#010;  {&#010;    &quot;pointsEarned&quot;:10,&#010;    &quot;pointsPossible&quot;:10&#010;  },&#010;  {&#010;    &quot;pointsEarned&quot;:4,&#010;    &quot;pointsPossible&quot;:5&#010;  }&#010;]"></textarea>
+                    <div id="importButtons">
+                        <button @click="importingJson = false;" id="importCancelButton">Cancel</button>
+                        <button @click="importJSON();" id="importParseButton">Import JSON</button>
+                    </div>
+                </div>
+            </main>
     
-                <h2>Categories:</h2>
-                
-                <table id="categories">
-                    <thead>
-                        <td>Name</td>
-                        <td>Weight</td>
-                        <td></td>
-                    </thead>
-                    <tbody v-for="(category, index) in categories">
-                        <tr>
-                            <td>
-                                <input type="text" v-model="category.name">
-                            </td>
-                            <td>
-                                <input type="number" min="0" v-model="category.weight">
-                            </td>
-                            <td>
-                                <button class="removeItem" @click="removeCategory(index);">╳</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <div>
-                    <span class="addItem" @click="addCategory();">+</span>
-                </div>
-    
-                <h2>
-                    Assignments:
-                    <button @click="importingJson = true;">Import</button>
-                </h2>
-                
-                <table id="assignments">
-                    <thead>
-                        <td colspan="3">Score</td>
-                        <td>Category</td>
-                        <td></td>
-                    </thead>
-                    <tbody v-for="(assignment, index) in assignments">
-                        <tr>
-                            <td>
-                                <input type="number" min="0" step="any" v-model="assignment.pointsEarned">
-                            </td>
-                            <td>/</td>
-                            <td>
-                                <input type="number" min="0" step="any" v-model="assignment.pointsPossible">
-                            </td>
-                            <td>
-                                <select v-model="assignment.categoryIndex">
-                                    <option v-for="(category, index) in categories" :value="index">
-                                        {{ category.name }}
-                                    </option>
-                                </select>
-                            </td>
-                            <td>
-                                <button class="removeItem" @click="removeAssignment(index);">╳</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <div>
-                    <span class="addItem" @click="addAssignment();">+</span>
-                </div>
-            </div>
-    
-            <div id="importContainer" v-show="importingJson">
-                <h2 style="margin-top: 0px;">Paste JSON string here:</h2>
-                <textarea v-model="jsonInput" rows="15" id="importBox" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off"
-                    placeholder="[&#010;  {&#010;    &quot;pointsEarned&quot;:10,&#010;    &quot;pointsPossible&quot;:10&#010;  },&#010;  {&#010;    &quot;pointsEarned&quot;:4,&#010;    &quot;pointsPossible&quot;:5&#010;  }&#010;]"></textarea>
-                <div id="importButtons">
-                    <button @click="importingJson = false;" id="importCancelButton">Cancel</button>
-                    <button @click="importJSON();" id="importParseButton">Import JSON</button>
-                </div>
-            </div>
-        </main>
-
-        <footer>
-            <!-- Link updated in UpdateTheme method -->
-            <a id="toggleTheme"></a>
-        </footer>
+            <footer>
+                <a href="javascript:void 0;" @click="updateTheme(!darkTheme);">{{ darkTheme ? "Light theme" : "Dark theme"}}</a>
+            </footer>
+        </div>
     </body>
 </html>

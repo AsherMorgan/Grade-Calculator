@@ -6,9 +6,10 @@ let app;
 // Initialize Vue
 function load() {
     app = new Vue({
-        el: "main", // Mount to <main/>
+        el: "#app", // Mount to app div
         
         data: {
+            darkTheme: false,       // Whether or not dark theme is enabled
             importingJson: false,   // Whether the JSON importer is visible
             jsonInput: "",          // The text in the JSON importer textarea
             categories: [           // The list of categories
@@ -106,7 +107,34 @@ function load() {
                     // Close JSON importer
                     this.importingJson = false;
                 }
-            }
+            },
+            
+            // Updates the interface theme
+            updateTheme: function(darkTheme = null) {
+                // Get theme from localStorage
+                if (darkTheme === null) {
+                    darkTheme = JSON.parse(localStorage.getItem("darkTheme"));
+                }
+
+                // Detect preferred color scheme
+                if (darkTheme === null) {
+                    darkTheme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+                }
+                
+                // Set theme
+                this.darkTheme = darkTheme
+
+                // Apply theme
+                if (this.darkTheme) {
+                    document.body.classList.add("dark");
+                }
+                else {
+                    document.body.classList.remove("dark");
+                }
+
+                // Save theme
+                localStorage.setItem("darkTheme", darkTheme);
+            },
         },
 
         computed: {
@@ -217,6 +245,9 @@ function load() {
             }
         }
     });
+
+    // Update theme on load
+    app.updateTheme();
 }
 
 
@@ -224,45 +255,4 @@ function load() {
 // Determines if a value is a number
 function isNumber(value) {
     return typeof(value) === "number" && !isNaN(value);
-}
-
-
-
-// Updates the interface theme
-function UpdateTheme(theme = null) {
-    // Get theme from localStorage
-    if (theme === null) {
-        theme = localStorage.getItem("theme");
-    }
-
-    // Detect preferred color scheme
-    if (theme === null) {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            theme = "Dark";
-        }
-        else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-            theme = "Light";
-        }
-    }
-    
-    // Apply theme
-    if (theme === "Dark") {
-        // Add dark class
-        document.body.classList.add("dark");
-    
-        // Update toggle
-        document.getElementById("toggleTheme").textContent = "Light theme";
-        document.getElementById("toggleTheme").href = "javascript:UpdateTheme('Light');";
-    }
-    else {
-        // Add light class
-        document.body.classList.remove("dark");
-    
-        // Update toggle
-        document.getElementById("toggleTheme").textContent = "Dark theme";
-        document.getElementById("toggleTheme").href = "javascript:UpdateTheme('Dark');";
-    }
-
-    // Save theme
-    localStorage.setItem("theme", theme);
 }

@@ -92,9 +92,15 @@
                 </div>
         
                 <div id="importContainer" v-show="importingJson">
-                    <h2 style="margin-top: 0px;">Paste JSON string here:</h2>
+                    <h2>Paste JSON string below:</h2>
+                    <p>
+                        The JSON string must be an array of dictionaries.
+                        Each dictionary must have properties called <code>pointsEarned</code> and <code>pointsPossible</code>.
+                        The value of these properties must be either a <code>number</code>, a <code>string</code>, or <code>null</code>.
+                        Comments are not allowed in the JSON string.
+                    </p>
                     <textarea v-model="jsonInput" rows="15" id="importBox" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off"
-                        placeholder="[&#010;  {&#010;    &quot;pointsEarned&quot;:10,&#010;    &quot;pointsPossible&quot;:10&#010;  },&#010;  {&#010;    &quot;pointsEarned&quot;:4,&#010;    &quot;pointsPossible&quot;:5&#010;  }&#010;]"></textarea>
+                        placeholder="[&#010;  {&#010;    &quot;pointsEarned&quot;:9,&#010;    &quot;pointsPossible&quot;:10&#010;  },&#010;  {&#010;    &quot;pointsEarned&quot;:null,&#010;    &quot;pointsPossible&quot;:&quot;5&quot;&#010;  }&#010;]"></textarea>
                     <div id="importButtons">
                         <button @click="importingJson = false;" id="importCancelButton">Cancel</button>
                         <button @click="importJSON();" id="importParseButton">Import JSON</button>

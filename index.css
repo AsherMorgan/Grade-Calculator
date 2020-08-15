@@ -35,6 +35,7 @@ header {
 }
 
 h2 {
+    margin-top: 0px;
     margin-bottom: 5px;
     font-size: 20px;
 }
@@ -117,6 +118,7 @@ input[type=number] {
 .addItem {
     display: inline-block;
     margin-top: 10px;
+    margin-bottom: 15px;
     padding: 0px;
     height: 40px;
     width: 40px;
@@ -136,6 +138,10 @@ input[type=number] {
     width: 275px;
     background-color: var(--container-color);
     padding: 10px;
+}
+
+#importContainer p {
+    text-align: justify;
 }
 
 #importBox {

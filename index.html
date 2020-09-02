@@ -12,11 +12,13 @@
     </head>
     <body onload="load();">
         <div id="app">
-            <header>
-                <h1>Grade-Calculator</h1>
-            </header>
+            <header>Grade-Calculator</header>
             
             <main>
+                <noscript>
+                    <h1 id="jsError">You must have JavaScript enabled to run Spanish-Quizzer.</h1>
+                </noscript>
+                
                 <div id="mainContainer" v-show="!importingJson">
                     <h2>Final Grade:</h2>
                     

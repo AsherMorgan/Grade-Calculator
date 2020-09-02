@@ -21,17 +21,24 @@ body {
     margin-bottom: 80px;
 }
 
-h1 {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
 header {
     position: fixed;
     top: 0px;
     left: 0px;
     width: 100%;
     background-color: var(--theme-color);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#jsError {
+    color: red;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 h2 {

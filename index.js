@@ -59,7 +59,7 @@ function load() {
             // Removes a category
             removeCategory: function(index) {
                 // Correct assignment category indexes
-                for (assignment of this.assignments) {
+                for (let assignment of this.assignments) {
                     if (assignment.categoryIndex == index) {
                         assignment.categoryIndex = 0;
                     }
@@ -84,11 +84,11 @@ function load() {
                     let json = JSON.parse(this.jsonInput);
             
                     // Iterate over assignments
-                    newAssignments = []
+                    let newAssignments = []
                     for (let key in json) {
                         // Get point values
-                        pointsEarned = isFinite(json[key]["pointsEarned"]) ? json[key]["pointsEarned"] : null;
-                        pointsPossible = isFinite(json[key]["pointsPossible"]) ? json[key]["pointsPossible"] : null;
+                        let pointsEarned = isFinite(json[key]["pointsEarned"]) ? json[key]["pointsEarned"] : null;
+                        let pointsPossible = isFinite(json[key]["pointsPossible"]) ? json[key]["pointsPossible"] : null;
                         
                         // Add assignment
                         newAssignments.push({
@@ -143,7 +143,7 @@ function load() {
                 // Get assignment point totals
                 let totalEarned = 0;
                 let totalPossible = 0;
-                for (assignment of this.assignments) {
+                for (let assignment of this.assignments) {
                     // Get assignment data
                     let weight = parseFloat(this.categories[assignment.categoryIndex].weight);
                     let pointsEarned = parseFloat(assignment.pointsEarned);
@@ -166,7 +166,7 @@ function load() {
             // Gets the final letter grade
             letter: function() {
                 // Get grade percentage
-                gradePercentage = this.percentage;
+                let gradePercentage = this.percentage;
                 
                 // Return letter
                 if (gradePercentage >= 97) {
@@ -216,7 +216,7 @@ function load() {
             // Gets the final grade color 
             color: function() {
                 // Get grade letter
-                letter = this.letter;
+                let letter = this.letter;
 
                 // Return color
                 switch (letter) {

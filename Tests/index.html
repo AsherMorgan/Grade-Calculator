@@ -7,16 +7,24 @@
         <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css"/>
         <script src="https://unpkg.com/chai/chai.js"></script>
         <script src="https://unpkg.com/mocha/mocha.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
     </head>
 
     <body>
         <div id="mocha"></div>
 
+        <!-- Scripts being tested -->
+        <script src="../index.js"></script>
+
         <!-- Setup tests -->
         <script class="mocha-init">
             mocha.setup('bdd');
             mocha.checkLeaks();
+            let expect = chai.expect;
         </script>
+
+        <!-- Tests -->
+        <script src="test.app.js"></script>
         
         <!-- Run tests -->
         <script class="mocha-exec">

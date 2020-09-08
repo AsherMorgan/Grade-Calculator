@@ -4,7 +4,7 @@ let app;
 
 
 // Initialize Vue
-function load() {
+function loadVue() {
     app = new Vue({
         el: "#app", // Mount to app div
         
@@ -243,11 +243,14 @@ function load() {
                         return "#808080";
                 }
             }
-        }
-    });
+        },
 
-    // Update theme on load
-    app.updateTheme();
+        // Called when the Vue is created
+        created: function() {
+            // Update theme
+            this.updateTheme();
+        },
+    });
 }
 
 

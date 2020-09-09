@@ -109,7 +109,7 @@ describe("App", function () {
             loadVue();
         });
         
-        it("Should be add a blank category", function () {
+        it("Should add a blank category", function () {
             // Add category
             app.addCategory();
 
@@ -128,7 +128,7 @@ describe("App", function () {
             loadVue();
         });
 
-        it("Should be remove the specified category", function () {
+        it("Should remove the specified category", function () {
             // Initialize categories
             app.categories = [
                 {
@@ -557,7 +557,7 @@ describe("App", function () {
             loadVue();
         });
 
-        it("Should be match the letter", function () {
+        it("Should match the letter", function () {
             // Assert color is correct
             expect(app.color).to.equal("#87BD6C");
 

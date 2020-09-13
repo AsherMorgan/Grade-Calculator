@@ -3,7 +3,9 @@ let app;
 
 
 
-// Initialize Vue
+/**
+ * Initializes the Vue
+ */
 function loadVue() {
     app = new Vue({
         el: "#app", // Mount to app div
@@ -28,7 +30,9 @@ function loadVue() {
         },
 
         methods: {
-            // Adds a blank assignment
+            /**
+             * Add a blank assignment
+             */
             addAssignment: function() {
                 this.assignments.push({
                     "pointsEarned": null,
@@ -37,7 +41,10 @@ function loadVue() {
                 });
             },
 
-            // Remove an assignment
+            /**
+             * Remove an assignment
+             * @param {Number} index - The index of the assignment
+             */
             removeAssignment: function(index) {
                 // Remove assignment
                 this.assignments.splice(index, 1);
@@ -48,7 +55,9 @@ function loadVue() {
                 }
             },
 
-            // Add a blank category
+            /**
+             * Add a blank category
+             */
             addCategory: function() {
                 this.categories.push({
                     "name": "New category",
@@ -56,7 +65,10 @@ function loadVue() {
                 });
             },
 
-            // Removes a category
+            /**
+             * Remove a category
+             * @param {Number} index - The index of the category
+             */
             removeCategory: function(index) {
                 // Correct assignment category indexes
                 for (let assignment of this.assignments) {
@@ -77,7 +89,9 @@ function loadVue() {
                 }
             },
 
-            // Imports JSON from the JSON importer
+            /**
+             * Import JSON from the JSON importer
+             */
             importJSON: function() {
                 try {
                     // Parse JSON
@@ -109,7 +123,10 @@ function loadVue() {
                 }
             },
             
-            // Updates the interface theme
+            /**
+             * Update the interface theme
+             * @param {bool} darkTheme - False for light mode, true for dark mode, null to detect the prefered theme.
+             */
             updateTheme: function(darkTheme = null) {
                 // Get theme from localStorage
                 if (darkTheme === null) {
@@ -138,7 +155,10 @@ function loadVue() {
         },
 
         computed: {
-            // Gets the final grade as a percentage
+            /**
+             * The percentage of the final grade
+             * @returns {Number} - The final grade
+             */
             percentage: function() {
                 // Get assignment point totals
                 let totalEarned = 0;
@@ -163,7 +183,10 @@ function loadVue() {
                 return gradePercentage;
             },
 
-            // Gets the final letter grade
+            /**
+             * The final grade as a letter grade
+             * @returns {String} - The letter grade
+             */
             letter: function() {
                 // Get grade percentage
                 let gradePercentage = this.percentage;
@@ -213,7 +236,10 @@ function loadVue() {
                 }
             },
 
-            // Gets the final grade color 
+            /**
+             * The color of the final grade
+             * @returns {String} - The hex code for the color
+             */
             color: function() {
                 // Get grade letter
                 let letter = this.letter;
@@ -245,7 +271,6 @@ function loadVue() {
             }
         },
 
-        // Called when the Vue is created
         created: function() {
             // Update theme
             this.updateTheme();
@@ -255,7 +280,9 @@ function loadVue() {
 
 
 
-// Finish loading the page
+/**
+ * Load the Vue and the page
+ */
 function load() {
     // Initialize Vue
     loadVue();
@@ -269,7 +296,10 @@ function load() {
 
 
 
-// Determines if a value is a number
+/**
+ * Determine if a value is a number
+ * @param {*} value - The value to test
+ */
 function isNumber(value) {
     return typeof(value) === "number" && !isNaN(value);
 }

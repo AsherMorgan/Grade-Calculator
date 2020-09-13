@@ -255,6 +255,20 @@ function loadVue() {
 
 
 
+// Finish loading the page
+function load() {
+    // Initialize Vue
+    loadVue();
+
+    // Unhide hidden divs
+    // Divs were hidden to improve interface for users with JS blocked
+    document.getElementById("mainContainer").hidden = false;
+    document.getElementById("importContainer").hidden = false;
+    document.querySelector("footer").hidden = false;
+}
+
+
+
 // Determines if a value is a number
 function isNumber(value) {
     return typeof(value) === "number" && !isNaN(value);

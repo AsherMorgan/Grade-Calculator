@@ -10,7 +10,7 @@
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
         <script src="index.js"></script>
     </head>
-    <body onload="loadVue();">
+    <body onload="load();">
         <div id="app">
             <header>Grade-Calculator</header>
             
@@ -19,7 +19,7 @@
                     <h1 id="jsError">You must have JavaScript enabled to run Spanish-Quizzer.</h1>
                 </noscript>
                 
-                <div id="mainContainer" v-show="!importingJson">
+                <div id="mainContainer" v-show="!importingJson" hidden>
                     <h2>Final Grade:</h2>
                     
                     <div id="grade" :style="{ 'background-color': color }">
@@ -93,7 +93,7 @@
                     </div>
                 </div>
         
-                <div id="importContainer" v-show="importingJson">
+                <div id="importContainer" v-show="importingJson" hidden>
                     <h2>Paste JSON string below:</h2>
                     <p>
                         The JSON string must be an array of dictionaries.

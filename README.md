@@ -24,7 +24,7 @@ The following scale is used to determine letter grades. Grades above 100% or bel
 ## Importing grades
 You can import assignments from a JSON string by clicking the import button.
 
-The JSON string must be an array of dictionaries. Each dictionary must have properties called `pointsEarned` and `pointsPossible`. The value of these properties must be either a `number`, a `string`, or `null`. Comments are not allowed in the JSON string. Example:
+The JSON string must be an array of dictionaries. Each dictionary must have properties called `pointsEarned` and `pointsPossible`. The value of these properties must be either a `Number`, a `String`, or `null`. Comments are not allowed in the JSON string. Example:
 ```JSON
 [
     {

@@ -4,21 +4,21 @@ A program to calculate your final grade given a list of assignments that are or 
 
 ## Letter grades
 The following scale is used to determine letter grades. Grades above 100% or below 0% will be marked as A+ and F respectively. Grades are rounded before a letter grade is assigned.
-| Letter Grade | Range    |
-| ------------ | -------- |
-| A+           | 97 - 100 |
-| A            | 93 - 97  |
-| A-           | 90 - 93  |
-| B+           | 87 - 90  |
-| B            | 83 - 87  |
-| B-           | 80 - 83  |
-| C+           | 77 - 80  |
-| C            | 73 - 77  |
-| C-           | 70 - 73  |
-| D+           | 67 - 70  |
-| D            | 63 - 67  |
-| D-           | 60 - 63  |
-| F            | 0 - 60   |
+| Range    | Letter Grade | Color  |
+| -------- | ------------ | ------ |
+| 97 - 100 | A+           | Green  |
+| 93 - 97  | A            | Green  |
+| 90 - 93  | A-           | Green  |
+| 87 - 90  | B+           | Blue   |
+| 83 - 87  | B            | Blue   |
+| 80 - 83  | B-           | Blue   |
+| 77 - 80  | C+           | Yellow |
+| 73 - 77  | C            | Yellow |
+| 70 - 73  | C-           | Yellow |
+| 67 - 70  | D+           | Orange |
+| 63 - 67  | D            | Orange |
+| 60 - 63  | D-           | Orange |
+| 0 - 60   | F            | Red    |
 
 
 ## Importing grades

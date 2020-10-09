@@ -102,6 +102,34 @@ textarea:focus, input:focus {
 
 
 
+/******** Grade Color styles ********/
+.letter-a {
+    background-color: #87BD6C;
+}
+
+.letter-b {
+    background-color: #CFE7FF;
+}
+
+.letter-c {
+    background-color: #FFFF8D;
+}
+
+.letter-d {
+    background-color: #F9AC48;
+}
+
+.letter-f {
+    background-color: #EF3D3D;
+}
+
+
+.letter-na {
+    background-color: #808080;
+}
+
+
+
 /******** Item styles ********/
 #assignments, #categories {
     margin: auto;
@@ -172,7 +200,7 @@ input[type=number] {
 
 /******** Dark styles ********/
 body.dark {
-    --theme-color: #597b37;
+    --theme-color: #587c46;
     --foreground-color: #e0e0e0;
     --background-color: #121416;
     --container-color: #323436;
@@ -186,4 +214,31 @@ body.dark {
 
 .dark a {
     color: #0080ff;
+}
+
+
+
+/******** Dark Grade Color styles ********/
+.dark .letter-a {
+    background-color: #587c46;
+}
+
+.dark .letter-b {
+    background-color: #6b9ccc;
+}
+
+.dark .letter-c {
+    background-color: #d4d454;
+}
+
+.dark .letter-e {
+    background-color: #e0932e;
+}
+
+.dark .letter-f {
+    background-color: #ce2c2c;
+}
+
+.dark .letter-na {
+    background-color: #808080;
 }

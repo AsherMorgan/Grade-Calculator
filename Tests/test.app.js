@@ -559,70 +559,70 @@ describe("App", function () {
 
         it("Should match the letter", function () {
             // Assert color is correct
-            expect(app.color).to.equal("#87BD6C");
+            expect(app.color).to.equal("letter-a");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 10.5;
-            expect(app.color).to.equal("#87BD6C");
+            expect(app.color).to.equal("letter-a");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 9.5;
-            expect(app.color).to.equal("#87BD6C");
+            expect(app.color).to.equal("letter-a");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 9;
-            expect(app.color).to.equal("#87BD6C");
+            expect(app.color).to.equal("letter-a");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 8.75;
-            expect(app.color).to.equal("#CFE7FF");
+            expect(app.color).to.equal("letter-b");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 8.5;
-            expect(app.color).to.equal("#CFE7FF");
+            expect(app.color).to.equal("letter-b");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 8.25;
-            expect(app.color).to.equal("#CFE7FF");
+            expect(app.color).to.equal("letter-b");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 7.75;
-            expect(app.color).to.equal("#FFFF8D");
+            expect(app.color).to.equal("letter-c");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 7.5;
-            expect(app.color).to.equal("#FFFF8D");
+            expect(app.color).to.equal("letter-c");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 7.25;
-            expect(app.color).to.equal("#FFFF8D");
+            expect(app.color).to.equal("letter-c");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 6.75;
-            expect(app.color).to.equal("#F9AC48");
+            expect(app.color).to.equal("letter-d");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 6.5;
-            expect(app.color).to.equal("#F9AC48");
+            expect(app.color).to.equal("letter-d");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 6.25;
-            expect(app.color).to.equal("#F9AC48");
+            expect(app.color).to.equal("letter-d");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 5.75;
-            expect(app.color).to.equal("#EF3D3D");
+            expect(app.color).to.equal("letter-f");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = 0;
-            expect(app.color).to.equal("#EF3D3D");
+            expect(app.color).to.equal("letter-f");
 
             // Adjust percentage and reassert color
             app.assignments[0].pointsEarned = -1;
-            expect(app.color).to.equal("#EF3D3D");
+            expect(app.color).to.equal("letter-f");
         });
 
-        it("Should be gray if the percentage is NaN", function () {
+        it("Should be N/A if the percentage is NaN", function () {
             // Initialize assignments
             app.assignments = [
                 {
@@ -633,7 +633,7 @@ describe("App", function () {
             ];
 
             // Assert color is correct
-            expect(app.color).to.equal("#808080");
+            expect(app.color).to.equal("letter-na");
         });
     });
 });

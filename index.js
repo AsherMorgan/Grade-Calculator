@@ -238,7 +238,7 @@ function loadVue() {
 
             /**
              * The color of the final grade
-             * @returns {String} - The hex code for the color
+             * @returns {String} - The color class
              */
             color: function() {
                 // Get grade letter
@@ -249,24 +249,24 @@ function loadVue() {
                     case "A+":
                     case "A":
                     case "A-":
-                        return "#87BD6C";
+                        return "letter-a";
                     case "B+":
                     case "B":
                     case "B-":
-                        return "#CFE7FF";
+                        return "letter-b";
                     case "C+":
                     case "C":
                     case "C-":
-                        return "#FFFF8D";
+                        return "letter-c";
                     case "D+":
                     case "D":
                     case "D-":
-                        return "#F9AC48";
+                        return "letter-d";
                     case "F":
-                        return "#EF3D3D";
+                        return "letter-f";
                     case "":
                     default:
-                        return "#808080";
+                        return "letter-na";
                 }
             }
         },

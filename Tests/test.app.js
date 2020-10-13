@@ -199,6 +199,10 @@ describe("App", function () {
             app.importingJson = true;
             app.jsonInput = "[]";
 
+            // Mock 'alert' method
+            let old_alert = alert;
+            alert = function() {};
+
             // Import JSON
             app.importJSON();
 
@@ -208,14 +212,21 @@ describe("App", function () {
             expect(app.assignments[0].pointsPossible).to.equal(10);
             expect(app.assignments[0].categoryIndex).to.equal(0);
 
-            // Assert JSON importer closed
-            expect(app.importingJson).to.equal(false);
+            // Assert JSON importer not closed
+            expect(app.importingJson).to.equal(true);
+
+            // Restore alert method
+            alert = old_alert;
         });
 
         it("Invalid JSON should not be imported", function () {
             // Input JSON string
             app.importingJson = true;
             app.jsonInput = "test";
+
+            // Mock 'alert' method
+            let old_alert = alert;
+            alert = function() {};
 
             // Import JSON
             try {
@@ -231,8 +242,11 @@ describe("App", function () {
             expect(app.assignments[0].pointsPossible).to.equal(10);
             expect(app.assignments[0].categoryIndex).to.equal(0);
 
-            // Assert JSON importer closed
-            expect(app.importingJson).to.equal(false);
+            // Assert JSON importer not closed
+            expect(app.importingJson).to.equal(true);
+
+            // Restore alert method
+            alert = old_alert;
         });
     });
 

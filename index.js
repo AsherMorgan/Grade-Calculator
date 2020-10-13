@@ -72,7 +72,7 @@ function loadVue() {
             removeCategory: function(index) {
                 // Correct assignment category indexes
                 for (let assignment of this.assignments) {
-                    if (assignment.categoryIndex == index) {
+                    if (assignment.categoryIndex === index) {
                         assignment.categoryIndex = 0;
                     }
                     else if (assignment.categoryIndex > index) {
@@ -114,12 +114,28 @@ function loadVue() {
 
                     // Set assignments
                     if (newAssignments.length > 0) {
+                        // Update assignments
                         this.assignments = newAssignments;
+                        
+                        // Close JSON importer and clear input
+                        this.importingJson = false;
+                        this.jsonInput = "";
+                    }
+                    else {
+                        alert("The JSON string does not contain any assignments.");
                     }
                 }
-                finally {
-                    // Close JSON importer
-                    this.importingJson = false;
+                catch (error) {
+                    // Log error
+                    console.error(error);
+                    
+                    // Alert user of error
+                    if (error.name === "SyntaxError") {
+                        alert("The JSON string is invalid.");
+                    }
+                    else {
+                        alert("An error occured, check the console for more details.");
+                    }
                 }
             },
             

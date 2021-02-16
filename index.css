@@ -3,9 +3,17 @@
     --theme-color: #87bd6c;
     --foreground-color: #000000;
     --background-color: #ffffff;
-    --container-color: #f0f0f0;
-    --add-button-color: #e0e0e0;
+    --container-color: #e0e0e0;
     --border-color: #808080;
+}
+
+
+
+/******** Default styles ********/
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
 }
 
 
@@ -13,66 +21,70 @@
 /******** Body styles ********/
 body {
     font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
     touch-action: manipulation;
-    margin-top: 80px;
     background-color: var(--background-color);
     color: var(--foreground-color);
     margin-bottom: 80px;
 }
-
-header {
-    position: fixed;
-    top: 0px;
-    left: 0px;
+#app {
     width: 100%;
+}
+header {
     background-color: var(--theme-color);
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 15px;
     font-size: 25px;
     font-weight: bold;
+    text-align: center;
 }
-
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+main>div {
+    margin: 10px;
+}
 #jsError {
+    text-align: center;
     color: red;
     font-weight: normal;
     font-size: 20px;
-    text-align: center;
-    margin-bottom: 15px;
 }
-
-h2 {
-    margin-top: 0px;
-    margin-bottom: 5px;
-    font-size: 20px;
-}
-
 footer {
-    position: fixed;
-    bottom: 0px;
-    padding: 5px;
     width: 100%;
     background-color: var(--background-color);
+    position: fixed;
+    bottom: 0px;
+    text-align: center;
+    padding: 5px;
 }
 
 
 
 /******** Element styles ********/
+h2 {
+    text-align: center;
+    margin: 5px;
+    font-size: 20px;
+}
 input, textarea, select, button {
     color: var(--foreground-color);
     background-color: var(--background-color);
     border: 1px solid var(--border-color);
 }
-
+input, select {
+    padding: 2px;
+    margin: 2px;
+}
 button {
-    height: 25px;
+    height: 27px;
+    padding: 5px;
     cursor: pointer;
 }
-
 button:hover:enabled:not(.removeItem) {
-    background-color: var(--add-button-color);
+    background-color: var(--container-color);
 }
-
 textarea:focus, input:focus {
     border: 1px solid var(--foreground-color);
 }
@@ -80,50 +92,35 @@ textarea:focus, input:focus {
 
 
 /******** Grade styles ********/
-#grade {
-    width: 120px;
+#finalGrade div {
     padding: 10px;
-    border: 1px solid var(--foreground-color);
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
+    color: #000000;
+    font-weight: bold;
+    margin: auto;
     display: flex;
     justify-content: space-between;
-    color: var(--foreground-color);
 }
-
 #gradePercentage {
     overflow: hidden;
 }
-
 #gradeLetter {
     margin-left: 10px;
 }
-
-
-
-/******** Grade Color styles ********/
 .letter-a {
     background-color: #87BD6C;
 }
-
 .letter-b {
     background-color: #CFE7FF;
 }
-
 .letter-c {
     background-color: #FFFF8D;
 }
-
 .letter-d {
     background-color: #F9AC48;
 }
-
 .letter-f {
     background-color: #EF3D3D;
 }
-
-
 .letter-na {
     background-color: #808080;
 }
@@ -131,67 +128,47 @@ textarea:focus, input:focus {
 
 
 /******** Item styles ********/
-#assignments, #categories {
-    margin: auto;
+#finalGrade, #assignments, #categories {
     background-color: var(--container-color);
-    padding: 5px;
 }
-
+table {
+    margin: 5px;
+}
+table thead {
+    text-align: center;
+}
 input[type=number] {
     width: 50px;
 }
-
 .removeItem, .dark .removeItem {
     color: var(--foreground-color);
     background-color: var(--container-color);
     border: none;
     padding: 0px;
-    margin: 0px;
+    margin: 5px;
     cursor: pointer;
-}
-
-.addItem {
-    display: inline-block;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    padding: 0px;
-    height: 40px;
-    width: 40px;
-    line-height: 40px;
-    font-size: 40px;
-    background-color: var(--add-button-color);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer
 }
 
 
 
 /******** JSON importer styles ********/
 #importContainer {
-    margin: auto;
-    width: 275px;
+    max-width: 300px;
     background-color: var(--container-color);
     padding: 10px;
 }
-
 #importContainer p {
     text-align: justify;
+    margin-bottom: 10px;
 }
-
 #importBox {
     width: 100%;
     resize: none;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
-
 #importButtons {
     text-align: left;
 }
-
 #importParseButton {
     float: right;
 }
@@ -202,43 +179,28 @@ input[type=number] {
 body.dark {
     --theme-color: #587c46;
     --foreground-color: #e0e0e0;
-    --background-color: #121416;
-    --container-color: #323436;
-    --add-button-color: #505050;
+    --background-color: #16181a;
+    --container-color: #26282a;
     --border-color: #606060;
 }
-
-.dark h1, .dark #grade {
-    color: #000000;
-}
-
 .dark a {
     color: #0080ff;
 }
-
-
-
-/******** Dark Grade Color styles ********/
 .dark .letter-a {
     background-color: #587c46;
 }
-
 .dark .letter-b {
     background-color: #6b9ccc;
 }
-
 .dark .letter-c {
     background-color: #d4d454;
 }
-
 .dark .letter-e {
     background-color: #e0932e;
 }
-
 .dark .letter-f {
     background-color: #ce2c2c;
 }
-
 .dark .letter-na {
     background-color: #808080;
 }

@@ -13,23 +13,26 @@
     <body onload="load();">
         <div id="app">
             <header>Grade-Calculator</header>
-            
+
             <main>
                 <noscript>
-                    <h1 id="jsError">You must have JavaScript enabled to run Spanish-Quizzer.</h1>
+                    <h1 id="jsError">You must have JavaScript enabled to run Grade-Calculator.</h1>
                 </noscript>
-                
-                <div id="mainContainer" v-show="!importingJson" hidden>
-                    <h2>Final Grade:</h2>
-                    
-                    <div id="grade" :class="color">
-                        <label id="gradePercentage">{{ percentage.toFixed(3) }}</label>
+
+                <div id="finalGrade" v-show="!importingJson" hidden>
+                    <h2>Final Grade</h2>
+                    <div :class="color">
+                        <label id="gradePercentage">{{ percentage.toFixed(2) }}</label>
                         <label id="gradeLetter">{{ letter }}</label>
                     </div>
-        
-                    <h2>Categories:</h2>
-                    
-                    <table id="categories">
+                </div>
+
+                <div id="categories" v-show="!importingJson" hidden>
+                    <h2>
+                        Categories
+                        <button @click="addCategory();">Add</button>
+                    </h2>
+                    <table>
                         <thead>
                             <td>Name</td>
                             <td>Weight</td>
@@ -37,28 +40,21 @@
                         </thead>
                         <tbody v-for="(category, index) in categories">
                             <tr>
-                                <td>
-                                    <input type="text" v-model="category.name">
-                                </td>
-                                <td>
-                                    <input type="number" min="0" v-model="category.weight">
-                                </td>
-                                <td>
-                                    <button class="removeItem" @click="removeCategory(index);">╳</button>
-                                </td>
+                                <td><input type="text" v-model="category.name"></td>
+                                <td><input type="number" min="0" v-model="category.weight"></td>
+                                <td><button class="removeItem" @click="removeCategory(index);">╳</button></td>
                             </tr>
                         </tbody>
                     </table>
-                    
-                    <div>
-                        <span class="addItem" @click="addCategory();">+</span>
-                    </div>
-        
+                </div>
+
+                <div id="assignments" v-show="!importingJson" hidden>
                     <h2>
-                        Assignments:
+                        Assignments
+                        <button @click="addAssignment();">Add</button>
                         <button @click="importingJson = true;">Import</button>
                     </h2>
-                    
+
                     <table id="assignments">
                         <thead>
                             <td colspan="3">Score</td>
@@ -87,12 +83,8 @@
                             </tr>
                         </tbody>
                     </table>
-                    
-                    <div>
-                        <span class="addItem" @click="addAssignment();">+</span>
-                    </div>
                 </div>
-        
+
                 <div id="importContainer" v-show="importingJson" hidden>
                     <h2>Paste JSON string below:</h2>
                     <p>
@@ -109,8 +101,8 @@
                     </div>
                 </div>
             </main>
-    
-            <footer>
+
+            <footer hidden>
                 <a href="javascript:void 0;" @click="updateTheme(!darkTheme);">{{ darkTheme ? "Light theme" : "Dark theme"}}</a>
             </footer>
         </div>

@@ -9,7 +9,7 @@ let app;
 function loadVue() {
     app = new Vue({
         el: "#app", // Mount to app div
-        
+
         data: {
             darkTheme: false,       // Whether or not dark theme is enabled
             importingJson: false,   // Whether the JSON importer is visible
@@ -96,14 +96,14 @@ function loadVue() {
                 try {
                     // Parse JSON
                     let json = JSON.parse(this.jsonInput);
-            
+
                     // Iterate over assignments
                     let newAssignments = []
                     for (let key in json) {
                         // Get point values
                         let pointsEarned = isFinite(json[key]["pointsEarned"]) ? json[key]["pointsEarned"] : null;
                         let pointsPossible = isFinite(json[key]["pointsPossible"]) ? json[key]["pointsPossible"] : null;
-                        
+
                         // Add assignment
                         newAssignments.push({
                             "pointsEarned": pointsEarned,
@@ -116,7 +116,7 @@ function loadVue() {
                     if (newAssignments.length > 0) {
                         // Update assignments
                         this.assignments = newAssignments;
-                        
+
                         // Close JSON importer and clear input
                         this.importingJson = false;
                         this.jsonInput = "";
@@ -128,7 +128,7 @@ function loadVue() {
                 catch (error) {
                     // Log error
                     console.error(error);
-                    
+
                     // Alert user of error
                     if (error.name === "SyntaxError") {
                         alert("The JSON string is invalid.");
@@ -138,7 +138,7 @@ function loadVue() {
                     }
                 }
             },
-            
+
             /**
              * Update the interface theme
              * @param {bool} darkTheme - False for light mode, true for dark mode, null to detect the prefered theme.
@@ -153,7 +153,7 @@ function loadVue() {
                 if (darkTheme === null) {
                     darkTheme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
                 }
-                
+
                 // Set theme
                 this.darkTheme = darkTheme
 
@@ -206,7 +206,7 @@ function loadVue() {
             letter: function() {
                 // Get grade percentage
                 let gradePercentage = this.percentage;
-                
+
                 // Return letter
                 if (gradePercentage >= 97) {
                     return "A+";
@@ -305,8 +305,10 @@ function load() {
 
     // Unhide hidden divs
     // Divs were hidden to improve interface for users with JS blocked
-    document.getElementById("mainContainer").hidden = false;
+    document.getElementById("finalGrade").hidden = false;
     document.getElementById("importContainer").hidden = false;
+    document.getElementById("categories").hidden = false;
+    document.getElementById("assignments").hidden = false;
     document.querySelector("footer").hidden = false;
 }
 

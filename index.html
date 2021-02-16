@@ -10,7 +10,7 @@
         <link rel="apple-touch-icon" sizes="180x180" href="Images/favicon-180.png">
         <link rel="stylesheet" href="index.css"/>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-        <script src="index.js"></script>        
+        <script src="index.js"></script>
     </head>
     <body onload="load();">
         <div id="app">
@@ -108,5 +108,12 @@
                 <a href="javascript:void 0;" @click="updateTheme(!darkTheme);">{{ darkTheme ? "Light theme" : "Dark theme"}}</a>
             </footer>
         </div>
+
+        <script>
+            // Register service worker
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("./service-worker.js");
+            }
+        </script>
     </body>
 </html>

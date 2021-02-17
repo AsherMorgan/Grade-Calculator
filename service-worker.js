@@ -1,5 +1,5 @@
 // Initialize constants
-const version = "test-20";
+const version = "grade-calculator-1";
 const resources = [
     "https://cdn.jsdelivr.net/npm/vue@2.6.11",
     "./Images/favicon-32.png",

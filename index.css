@@ -1,6 +1,6 @@
 /******** Variable styles ********/
 :root {
-    --theme-color: #87bd6c;
+    --theme-color: #6f9d58;
     --foreground-color: #000000;
     --background-color: #ffffff;
     --container-color: #e0e0e0;
@@ -35,6 +35,7 @@ header {
     font-size: 25px;
     font-weight: bold;
     text-align: center;
+    color: #000000;
 }
 main {
     display: flex;
@@ -107,7 +108,7 @@ textarea:focus, input:focus {
     margin-left: 10px;
 }
 .letter-a {
-    background-color: #87BD6C;
+    background-color: var(--theme-color);
 }
 .letter-b {
     background-color: #CFE7FF;
@@ -177,7 +178,6 @@ input[type=number] {
 
 /******** Dark styles ********/
 body.dark {
-    --theme-color: #587c46;
     --foreground-color: #e0e0e0;
     --background-color: #16181a;
     --container-color: #26282a;
@@ -187,7 +187,7 @@ body.dark {
     color: #0080ff;
 }
 .dark .letter-a {
-    background-color: #587c46;
+    background-color: var(--theme-color);
 }
 .dark .letter-b {
     background-color: #6b9ccc;

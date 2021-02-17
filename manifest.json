@@ -1,5 +1,5 @@
 {
-    "background_color": "#87bd6c",
+    "background_color": "#6f9d58",
     "categories": ["education", "productivity"],
     "description": "Calculates your final grade from a list of assignments.",
     "display": "fullscreen",
@@ -37,5 +37,5 @@
     "scope": "./",
     "short_name": "Grade-Calculator",
     "start_url": "./index.html",
-    "theme_color": "#87bd6c"
+    "theme_color": "#6f9d58"
 }

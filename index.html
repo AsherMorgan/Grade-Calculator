@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8"/>
         <title>Grade-Calculator</title>
-        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+        <meta name="description" content="Calculates your final grade from a list of assignments.">
+        <meta name="viewport" content="width=device-width"/>
         <meta name="theme-color" content="#6f9d58">
         <link rel="manifest" href="manifest.json">
         <link rel="icon" type="image/png" href="Images/favicon-32.png">
@@ -32,7 +33,9 @@
                 <div id="categories" v-show="!importingJson" hidden>
                     <h2>
                         Categories
-                        <button @click="addCategory();">Add</button>
+                        <button @click="addCategory();" class="icon" title="Add Category">
+                            <img src="Images/plus.svg" alt="">
+                        </button>
                     </h2>
                     <table>
                         <thead>
@@ -42,9 +45,11 @@
                         </thead>
                         <tbody v-for="(category, index) in categories">
                             <tr>
-                                <td><input type="text" v-model="category.name"></td>
-                                <td><input type="number" min="0" v-model="category.weight"></td>
-                                <td><button class="removeItem" @click="removeCategory(index);">╳</button></td>
+                                <td><input type="text" v-model="category.name" title="Category Name"></td>
+                                <td><input type="number" min="0" v-model="category.weight" title="Category Weight"></td>
+                                <td><button @click="removeCategory(index);" class="icon" title="Remove Category">
+                                    <img src="Images/trash.svg" alt="">
+                                </button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -53,8 +58,12 @@
                 <div id="assignments" v-show="!importingJson" hidden>
                     <h2>
                         Assignments
-                        <button @click="addAssignment();">Add</button>
-                        <button @click="importingJson = true;">Import</button>
+                        <button @click="addAssignment();" class="icon" title="Add Assignment">
+                            <img src="Images/plus.svg" alt="">
+                        </button>
+                        <button @click="importingJson = true;" class="icon" title="Import Assignments">
+                            <img src="Images/import.svg" alt="">
+                        </button>
                     </h2>
 
                     <table id="assignments">
@@ -66,21 +75,23 @@
                         <tbody v-for="(assignment, index) in assignments">
                             <tr>
                                 <td>
-                                    <input type="number" min="0" step="any" v-model="assignment.pointsEarned">
+                                    <input type="number" min="0" step="any" v-model="assignment.pointsEarned" title="Points Earned">
                                 </td>
                                 <td>/</td>
                                 <td>
-                                    <input type="number" min="0" step="any" v-model="assignment.pointsPossible">
+                                    <input type="number" min="0" step="any" v-model="assignment.pointsPossible" title="Points Possible">
                                 </td>
                                 <td>
-                                    <select v-model="assignment.categoryIndex">
+                                    <select v-model="assignment.categoryIndex" title="Assignment Category">
                                         <option v-for="(category, index) in categories" :value="index">
                                             {{ category.name }}
                                         </option>
                                     </select>
                                 </td>
                                 <td>
-                                    <button class="removeItem" @click="removeAssignment(index);">╳</button>
+                                    <button @click="removeAssignment(index);" class="icon" title="Remove Assignment">
+                                        <img src="Images/trash.svg" alt="">
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

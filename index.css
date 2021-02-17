@@ -78,16 +78,27 @@ input, select {
     padding: 2px;
     margin: 2px;
 }
-button {
+button:not(.icon) {
     height: 27px;
     padding: 5px;
     cursor: pointer;
 }
-button:hover:enabled:not(.removeItem) {
+button:hover:enabled:not(.icon) {
     background-color: var(--container-color);
 }
 textarea:focus, input:focus {
     border: 1px solid var(--foreground-color);
+}
+button.icon, .dark button.icon {
+    background-color: #00000000;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+button.icon img {
+    height: 24px;
+    width: 24px;
 }
 
 
@@ -141,14 +152,6 @@ table thead {
 input[type=number] {
     width: 50px;
 }
-.removeItem, .dark .removeItem {
-    color: var(--foreground-color);
-    background-color: var(--container-color);
-    border: none;
-    padding: 0px;
-    margin: 5px;
-    cursor: pointer;
-}
 
 
 
@@ -186,6 +189,9 @@ body.dark {
 .dark a {
     color: #0080ff;
 }
+.dark button.icon img {
+    filter: invert(90%);
+}
 .dark .letter-a {
     background-color: var(--theme-color);
 }
@@ -203,4 +209,24 @@ body.dark {
 }
 .dark .letter-na {
     background-color: #808080;
+}
+
+
+
+/******** Mobile styles ********/
+@media only screen and (max-width: 800px) {
+    button.icon img {
+        height: 35px;
+        width: 35px;
+    }
+    h2 {
+        font-size: 25px;
+    }
+    input, select, textarea {
+        font-size: 16px;
+    }
+    button:not(.icon) {
+        font-size: 16px;
+        height: 35px;
+    }
 }

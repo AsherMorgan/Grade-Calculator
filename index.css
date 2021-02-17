@@ -24,7 +24,6 @@ body {
     touch-action: manipulation;
     background-color: var(--background-color);
     color: var(--foreground-color);
-    margin-bottom: 80px;
 }
 #app {
     width: 100%;
@@ -35,6 +34,11 @@ header {
     font-size: 25px;
     font-weight: bold;
     text-align: center;
+    color: #000000;
+}
+header button.icon {
+    position: fixed;
+    right: 15px;
     color: #000000;
 }
 main {
@@ -51,14 +55,6 @@ main>div {
     color: red;
     font-weight: normal;
     font-size: 20px;
-}
-footer {
-    width: 100%;
-    background-color: var(--background-color);
-    position: fixed;
-    bottom: 0px;
-    text-align: center;
-    padding: 5px;
 }
 
 
@@ -189,7 +185,7 @@ body.dark {
 .dark a {
     color: #0080ff;
 }
-.dark button.icon img {
+.dark main button.icon img {
     filter: invert(90%);
 }
 .dark .letter-a {
@@ -215,7 +211,7 @@ body.dark {
 
 /******** Mobile styles ********/
 @media only screen and (max-width: 800px) {
-    button.icon img {
+    main button.icon img {
         height: 35px;
         width: 35px;
     }
@@ -228,5 +224,11 @@ body.dark {
     button:not(.icon) {
         font-size: 16px;
         height: 35px;
+    }
+}
+@media only screen and (max-width: 300px) {
+    header button.icon {
+        position: relative;
+        float: right;
     }
 }

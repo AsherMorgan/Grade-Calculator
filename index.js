@@ -303,13 +303,13 @@ function load() {
     // Initialize Vue
     loadVue();
 
-    // Unhide hidden divs
-    // Divs were hidden to improve interface for users with JS blocked
+    // Unhide hidden elements
+    // Elements were hidden to improve interface for users with JS blocked
+    document.getElementById("themeButton").hidden = false;
     document.getElementById("finalGrade").hidden = false;
     document.getElementById("importContainer").hidden = false;
     document.getElementById("categories").hidden = false;
     document.getElementById("assignments").hidden = false;
-    document.querySelector("footer").hidden = false;
 }
 
 

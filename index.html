@@ -15,7 +15,13 @@
     </head>
     <body onload="load();">
         <div id="app">
-            <header>Grade-Calculator</header>
+            <header>
+                Grade-Calculator
+                <button id="themeButton" @click="updateTheme(!darkTheme);" class="icon" :title="darkTheme ? 'Light theme' : 'Dark theme'" hidden>
+                    <img src="Images/sun.svg" alt="" v-show="darkTheme">
+                    <img src="Images/moon.svg" alt="" v-show="!darkTheme">
+                </button>
+            </header>
 
             <main>
                 <noscript>
@@ -114,10 +120,6 @@
                     </div>
                 </div>
             </main>
-
-            <footer hidden>
-                <a href="javascript:void 0;" @click="updateTheme(!darkTheme);">{{ darkTheme ? "Light theme" : "Dark theme"}}</a>
-            </footer>
         </div>
 
         <script>

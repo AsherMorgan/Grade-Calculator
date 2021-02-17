@@ -1,5 +1,5 @@
 // Initialize constants
-const version = "grade-calculator-1";
+const version = "grade-calculator-2";
 const resources = [
     "https://cdn.jsdelivr.net/npm/vue@2.6.11",
     "./Images/favicon-32.png",
@@ -8,6 +8,11 @@ const resources = [
     "./Images/favicon-192.png",
     "./Images/favicon-512-maskable.png",
     "./Images/favicon-512.png",
+    "./Images/import.svg",
+    "./Images/moon.svg",
+    "./Images/plus.svg",
+    "./Images/sun.svg",
+    "./Images/trash.svg",
     "./index.css",
     "./index.html",
     "./index.js",
@@ -44,7 +49,13 @@ self.addEventListener("fetch", function(event) {
         }
         else {
             // Fall back to network
-            return fetch(event.request);
+            const response = await fetch(event.request);
+
+            // Add response to cache
+            cache.put(event.request, response.clone());
+
+            // Return response
+            return response;
         }
     }());
 });

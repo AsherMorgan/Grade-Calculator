@@ -37,7 +37,7 @@ header {
     color: #000000;
 }
 header button.icon {
-    position: fixed;
+    position: absolute;
     right: 15px;
     color: #000000;
 }
@@ -228,7 +228,7 @@ body.dark {
 }
 @media only screen and (max-width: 300px) {
     header button.icon {
-        position: relative;
+        position: static;
         float: right;
     }
 }

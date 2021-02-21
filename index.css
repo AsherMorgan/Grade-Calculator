@@ -60,6 +60,9 @@ main>div {
 
 
 /******** Element styles ********/
+h1 {
+    margin-bottom: 5px;
+}
 h2 {
     text-align: center;
     margin: 5px;
